@@ -1,64 +1,6 @@
-kill
-hurt
-jump over
-fly
-attack
-tumble over
-shake
-interrogate
-sneak up on
-die from
-shank
-vomit on
-spy on
-score
-are killed by
-collect
-fall on
-massacre
-insult
-inspect
-wrestle
-submit
-squeeze
-crush
-smash
-run with
-explore
-run away from
-somersault
-choose
-are chosen by
-wage war on
-cast shadows on
-discover secrets about
-treat
-oppress
-organize
-walk on
-are freed by
-win
-lose
-eat
-consume
-buy
-turn
-twist
-upload
-download
-build
-sell
 accelerate the growth of
 accept
-admire
-agree with
 acquire
-amuse
-annoy
-arrest
-attack
-avoid
-argue with
 activate
 adapt with
 add
@@ -66,52 +8,106 @@ adhere to
 adjust
 administer medicine to
 administrate
+admire
 advance
 advise
-advocate for
 advocate against
+advocate for
+agree with
 aid
 alter
+amuse
 analyse
+annoy
 anticipate
 approach
+are chosen by
+are damaged by
+are deceived by
+are delivered to
+are destroyed by
+are documented by
+are earned by
+are edited by
+are eliminated by
+are employed by
+are enlarged by
+are enriched by
+are entertained by
+are expanded by
+are freed by
+are killed by
+are lectured by
+are measured by
+are modified by
+are multiplied by
+are nailed by
+are noticed by
+are nuked by
+are obeyed by
+are operated on by
+are processed by
+are produced by
+are ranked by
+are recycled by
+are reduced by
+are taught Chinese by
+are taught English by
+are taught manners by
+are taught maths by
+are taught philosophy by
+are taught physical fitness by
+are taught psychology by
+are taught religions by
+are taught science by
+are taught street smarts by
+are transformed into
+argue with
 arrange
+arrest
+ask for forgiveness from
 ask for help from
 ask impossible favors of
-ask for forgiveness from
 ask stupid questions to
 assemble
 assist
+attack
+attack
 attain
 attract
 augment
 automate
+avoid
 balance
-bargain with
-borrow things from
-buy
 bang
+bargain with
 battle
 beg for forgiveness from
+borrow things from
+build
 bury
 bury things with
+buy
+buy
 buy things from
-calculate risks with
 calculate numbers with
-carry
-chase
-claim
-choke
-clean
-collect
+calculate risks with
 capitalize on
 capture
+carry
 carry out nefarious plans with
+cast shadows on
 catalogue
 challenge
+chase
+choke
+choose
+claim
+clean
 clear levels of
 collaborate with
-confuse
+collect
+collect
 combine
 communicate with
 complete
@@ -119,74 +115,73 @@ compute
 conceive
 conceptualize
 condense
+confuse
 consolidate power with
 construct
+consume
 control
 convert
 coordinate
 correct
 count
 create
+create life with
+crush
 cultivate
 cut
+damage
+deceive
 decrease the number of
+delight
+deliver
 deliver
 describe
 design
+destroy
 develop
+die from
 direct groups of
 discover
-destroy
-are destroyed by
-damage
-are damaged by
-deceive
-are deceived by
-delight
-deliver
-are delivered to
+discover secrets about
 dispatch
 distribute
 document
-are documented by
+download
 earn
-are earned by
+eat
 edit
-are edited by
-employ
-are employed by
-entertain
-are entertained by
-examine
 eliminate
-are eliminated by
+employ
 encourage
 endorse
 enforce
 engage with
 engineer
 enlarge
-are enlarged by
 enrich
-are enriched by
+entertain
 establish bases with
 estimate the amount of
+examine
 expand
-are expanded by
 explain
+explore
 facilitate
+fall on
 familiarize
-fix
-follow
 fashion
-fit together
-focus on
-formalize
-formulate
-form groups of
-fortify
 fight
 find
+fit together
+fix
+fly
+focus on
+follow
+follow
+form groups of
+formalize
+formulate
+fortify
 frame
 fulfil
 furnish rooms with
@@ -194,29 +189,33 @@ gain
 gather
 generate
 govern cities of
-group together
 grab
+group together
 guide
 handle
-hire
 harass
-hunt
+hire
 host
+hunt
+hurt
 identify
-illustrate
 illuminate
+illustrate
 implement
 improve
 improvise
-indoctrinate
 increase the amount of
+indoctrinate
 influence
 innovate
 inquire about
 inspect
+inspect
 inspire
 install
 instruct
+insult
+interrogate
 interview
 introduce
 invent
@@ -224,65 +223,62 @@ invest in
 investigate
 irritate
 isolate
+jackknife
 join
 joke with
+judge
 juggle
 jump over
-judge
+jump over
 kick
+kill
 kiss
 knock out
-launch
-lecture
-are lectured by
-lead
-follow
 laugh about
+launch
+lead
+lecture
 lick
-look at
 localize
 locate
+look at
+lose
 maintain
 manage
 map
-move
-mine
+massacre
 maximize
 measure
-are measured by
+mine
 minimize
 model
 modernize
 modify
-are modified by
 monitor
 motivate
 move
+move
 multiply
-are multiplied by
-notice
-are noticed by
 nail
-nullify
-nuke
-are nuked by
-are nailed by
 negate
+notice
+nuke
+nullify
+obey
 observe
 obtain
-offer
-obey
-are obeyed by
 obtain
-own
+offer
 open up
 operate
 operate on
-are operated on by
+oppress
 order
+organize
 organize
 orientate
 overhaul
+own
 participate with
 perceive
 perform
@@ -290,9 +286,7 @@ prepare for
 prevent
 prioritize
 process
-are processed by
 produce
-are produced by
 program
 promote
 propose to
@@ -303,14 +297,11 @@ question
 quote
 raise
 rank
-are ranked by
 rate
 react to
 record
-reduce
-are reduced by
 recycle
-are recycled by
+reduce
 refine
 regulate
 rehabilitate
@@ -325,58 +316,66 @@ retrieve
 reverse
 review
 reward
+run away from
+run with
 salvage
+score
 secure
 select
+sell
+sell
 separate
 serve
+shake
+shank
 shape
 shrink
 simplify
-sell
+slaughter
+smash
+sneak up on
 solve puzzles made out of
+somersault
+spy on
+squeeze
 stimulate
 strategize with
 strengthen
+struggle against
 study
+submit
 supervise
 supply
 support
 survey
 tailor outfits for
 target
-teach maths to
+teach Chinese to
 teach English to
 teach manners to
-teach Chinese to
-teach science to
-teach religions to
+teach maths to
 teach philosophy to
-teach psychology to
 teach physical fitness to
+teach psychology to
+teach religions to
+teach science to
 teach street smarts to
-are taught maths by
-are taught English by
-are taught manners by
-are taught Chinese by
-are taught science by
-are taught religions by
-are taught philosophy by
-are taught psychology by
-are taught physical fitness by
-are taught street smarts by
 terminate
 test
 tighten
 trade with
 train
 transform
-are transformed into
 translate
 transport
+treat
+tumble over
+turn
+twist
 uncover
 unify
 upgrade
+upload
 use
 utilize
 validate
@@ -385,17 +384,18 @@ vandalize
 verify
 view
 visit
-weigh
+vomit on
+wage war on
+walk on
 warm up
+weigh
+welcome
+whisper at
+win
 wish for
 wreck
 wrestle
-whisper at
-welcome
+wrestle
 write about
 yawn at
 yell at
-jackknife
-create life with
-slaughter
-struggle against

@@ -1,200 +1,72 @@
-castle
-crevasse
-cubicle
-telephone wire
-ethernet cable
-computer monitor
-power cord
-cardboard box
+abbey
+aircraft carrier
+alcove
+allegory
+alley
+altar
+amusement park
+anarchy
+apartment complex
+archipelago
+aristocracy
+assylum
+attic
+basement
+bathroom
+battlezone
+bedroom
 bin
-trash can
-pile of garbage
-dump
 can
-can of soup
 can of beans
 can of peas
-supermarket
-produce aisle
-department store
-street
-alcove
-cove
-mortuary
+can of soup
+canyon
+car
+cardboard box
+castle
+cave
 cemetary
+city
+computer monitor
+cove
+crevasse
+cubicle
+cyberworld
+department store
+dump
+ethernet cable
+forest
+garden
 hospital
-bathroom
-shower
-sewer
-piping system
+hotel
+house
+kitchen
+living room
+mainframe
+mall
+meadow
 mess of wires
-cave
-city
-meadow
-wasteland
-warzone
-house
-apartment complex
-yard
-ocean
-bathtub
-forest
-mountain
-living room
-bedroom
-basement
-kitchen
-plaza
-mall
-hotel
-pit
-canyon
-monarchy
-garden
 military base
-battlezone
+monarchy
+mortuary
+mountain
+ocean
 pet store
-stadium
-cyberworld
-mainframe
-video game
-car
-aircraft carrier
+pile of garbage
+piping system
+pit
+plaza
+power cord
+produce aisle
+sewer
+shower
 speedboat
-apartment complex
-yard
-ocean
-bathtub
-forest
-mountain
-living room
-bedroom
-basement
-kitchen
-plaza
-mall
-hotel
-pit
-canyon
-monarchy
-garden
-military base
-cave
-city
-meadow
-wasteland
-warzone
-house
-apartment complex
-yard
-ocean
-bathtub
-forest
-mountain
-living room
-bedroom
-basement
-kitchen
-plaza
-mall
-hotel
-pit
-canyon
-monarchy
-garden
-military base
-battlezone
-pet store
 stadium
-cyberworld
-mainframe
+street
+supermarket
+telephone wire
+trash can
 video game
-car
-aircraft carrier
-speedboat
-apartment complex
-yard
-ocean
-bathtub
-forest
-mountain
-living room
-bedroom
-basement
-kitchen
-plaza
-mall
-hotel
-pit
-canyon
-monarchy
-cave
-city
-meadow
-wasteland
 warzone
-house
-apartment complex
-yard
-ocean
-bathtub
-forest
-mountain
-living room
-bedroom
-basement
-kitchen
-plaza
-mall
-hotel
-pit
-canyon
-monarchy
-garden
-military base
-battlezone
-pet store
-stadium
-cyberworld
-mainframe
-video game
-car
-aircraft carrier
-speedboat
-apartment complex
-yard
-ocean
-bathtub
-forest
-mountain
-living room
-bedroom
-basement
-kitchen
-plaza
-mall
-hotel
-pit
-canyon
-monarchy
-garden
-military base
-cave
-city
-meadow
 wasteland
-warzone
-house
-apartment complex
 yard
-ocean
-bathtub
-forest
-mountain
-living room
-bedroom
-basement
-kitchen
-plaza
-mall
-hotel

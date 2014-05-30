@@ -1,64 +1,6 @@
-kills
-hurts
-jumps over
-flies
-attacks
-tumbles over
-shakes
-interrogates
-sneaks up on
-dies from
-shanks
-vomits on
-spies on
-scores
-is killed by
-collects
-falls on
-massacres
-insults
-inspects
-wrestles
-submits
-squeezes
-crushes
-smashes
-runs with
-explores
-runs away from
-somersaults
-chooses
-is chosen by
-wages war on
-casts shadows on
-discovers secrets about
-treats
-oppresses
-organizes
-walks on
-is freed by
-wins
-loses
-eats
-consumes
-buys
-turns
-twists
-uploads
-downloads
-builds
-sells
 accelerates the growth of
 accepts
-admires
-agrees with
 acquires
-amuses
-annoys
-arrests
-attacks
-avoids
-argues with
 activates
 adapts with
 adds
@@ -66,52 +8,65 @@ adheres to
 adjusts
 administers medicine to
 administrates
+admires
 advances
 advises
-advocates for
 advocates against
+advocates for
+agrees with
 aids
 alters
+amuses
 analyses
+annoys
 anticipates
 approaches
+argues with
 arranges
+arrests
+asks for forgiveness from
 asks for help from
 asks impossible favors of
-asks for forgiveness from
 asks stupid questions to
 assembles
 assists
+attacks
+attacks
 attains
 attracts
 augments
 automates
+avoids
 balances
-bargains with
-borrows things from
-buys
 bangs
+bargains with
 battles
 begs for forgiveness from
+borrows things from
+builds
 buries
 buries things with
+buys
+buys
 buys things from
-calculates risks with
 calculates numbers with
-carries
-chases
-claims
-chokes
-cleans
-collects
+calculates risks with
 capitalizes on
 captures
+carries
 carries out nefarious plans with
+casts shadows on
 catalogues
 challenges
+chases
+chokes
+chooses
+claims
+cleans
 clears levels of
 collaborates with
-confuses
+collects
+collects
 combines
 communicates with
 completes
@@ -119,74 +74,72 @@ computes
 conceives
 conceptualizes
 condenses
+confuses
 consolidates power with
 constructs
+consumes
 controls
 converts
 coordinates
 corrects
 counts
 creates
+creates life with
+crushes
 cultivates
 cuts
+damages
+deceives
 decreases the number of
+delights
+delivers
 delivers
 describes
 designs
+destroys
 develops
+dies from
 directs groups of
 discovers
-destroys
-is destroyed by
-damages
-is damaged by
-deceives
-is deceived by
-delights
-delivers
-is delivered to
+discovers secrets about
 dispatches
 distributes
 documents
-is documented by
+downloads
 earns
-is earned by
+eats
 edits
-is edited by
-employs
-is employed by
-entertains
-is entertained by
-examines
 eliminates
-is eliminated by
+employs
 encourages
 endorses
 enforces
 engages with
 engineers
 enlarges
-is enlarged by
 enriches
-is enriched by
+entertains
 establishes bases with
 estimates the amount of
+examines
 expands
-is expanded by
 explains
+explores
 facilitates
+falls on
 familiarizes
-fixes
-follows
 fashions
-fits together
-focuses on
-formalizes
-formulates
-forms groups of
-fortifies
 fights
 finds
+fits together
+fixes
+flies
+focuses on
+follows
+formalizes
+forms groups of
+formulates
+fortifies
 frames
 fulfils
 furnishes rooms with
@@ -194,95 +147,138 @@ gains
 gathers
 generates
 governs cities of
-groups together
 grabs
+groups together
 guides
 handles
-hires
 harasses
-hunts
+hires
 hosts
+hunts
+hurts
 identifies
-illustrates
 illuminates
+illustrates
 implements
 improves
 improvises
-indoctrinates
 increases the amount of
+indoctrinates
 influences
 innovates
 inquires about
 inspects
+inspects
 inspires
 installs
 instructs
+insults
+interrogates
 interviews
 introduces
 invents
-invests in
 investigates
+invests in
 irritates
+is chosen by
+is damaged by
+is deceived by
+is delivered to
+is destroyed by
+is documented by
+is earned by
+is edited by
+is eliminated by
+is employed by
+is enlarged by
+is enriched by
+is entertained by
+is expanded by
+is freed by
+is killed by
+is lectured by
+is measured by
+is modified by
+is multiplied by
+is nailed by
+is noticed by
+is nuked by
+is obeyed by
+is operated on by
+is processed by
+is produced by
+is ranked by
+is recycled by
+is reduced by
+is taught Chinese by
+is taught English by
+is taught manners by
+is taught maths by
+is taught philosophy by
+is taught physical fitness by
+is taught psychology by
+is taught religions by
+is taught science by
+is taught street smarts by
+is transformed into
 isolates
+jackknifes
 joins
 jokes with
+judges
 juggles
 jumps over
-judges
+jumps over
 kicks
+kills
 kisses
 knocks out
-launches
-lectures
-is lectured by
-leads
-levitates
 laughs about
+launches
+leads
+lectures
+levitates
 licks
-looks at
 localizes
 locates
+looks at
+loses
 maintains
 manages
 maps
-moves
-mines
+massacres
 maximizes
 measures
-is measured by
+mines
 minimizes
 models
 modernizes
 modifies
-is modified by
 monitors
 motivates
 moves
+moves
 multiplies
-is multiplied by
-notices
-is noticed by
 nails
-nullifies
-nukes
-is nuked by
-is nailed by
 negates
+notices
+nukes
+nullifies
+obeys
 observes
 obtains
-offers
-obeys
-is obeyed by
 obtains
-owns
+offers
 opens up
 operates
 operates on
-is operated on by
+oppresses
 orders
+organizes
 organizes
 orientates
 overhauls
+owns
 participates with
 perceives
 performs
@@ -290,9 +286,7 @@ prepares for
 prevents
 prioritizes
 processes
-is processed by
 produces
-is produced by
 programs
 promotes
 proposes to
@@ -303,14 +297,11 @@ questions
 quotes
 raises
 ranks
-is ranked by
 rates
 reacts to
 records
-reduces
-is reduced by
 recycles
-is recycled by
+reduces
 refines
 regulates
 rehabilitates
@@ -325,58 +316,65 @@ retrieves
 reverses
 reviews
 rewards
+runs away from
+runs with
 salvages
+scores
 secures
 selects
+sells
+sells
 separates
 serves
+shakes
+shanks
 shapes
 shrinks
 simplifies
-sells
+slaughters
+smashes
+sneaks up on
 solves puzzles made out of
+somersaults
+spies on
+squeezes
 stimulates
 strategizes with
 strengthens
 studies
+submits
 supervises
 supplies
 supports
 surveys
 tailors outfits for
 targets
-teaches maths to
+teaches Chinese to
 teaches English to
 teaches manners to
-teaches Chinese to
-teaches science to
-teaches religions to
+teaches maths to
 teaches philosophy to
-teaches psychology to
 teaches physical fitness to
+teaches psychology to
+teaches religions to
+teaches science to
 teaches street smarts to
-is taught maths by
-is taught English by
-is taught manners by
-is taught Chinese by
-is taught science by
-is taught religions by
-is taught philosophy by
-is taught psychology by
-is taught physical fitness by
-is taught street smarts by
 terminates
 tests
 tightens
 trades with
 trains
 transforms
-is transformed into
 translates
 transports
+treats
+tumbles over
+turns
+twists
 uncovers
 unifies
 upgrades
+uploads
 uses
 utilizes
 validates
@@ -385,16 +383,18 @@ vandalizes
 verifies
 views
 visits
-weighs
+vomits on
+wages war on
+walks on
 warms up
+weighs
+welcomes
+whispers at
+wins
 wishes for
 wrecks
 wrestles
-whispers at
-welcomes
+wrestles
 writes about
 yawns at
 yells at
-jackknifes
-creates life with
-slaughters

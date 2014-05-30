@@ -1,42 +1,42 @@
-struggle with
-struggle against
-dismantle
-establish
-set up
-tear down
-repair
-destroy
-fight against
-fight for
-battle with
-battle against
-battle for
-overcome
+aid
+are crushed by
+are helped by
+are obliterated by
 are overwhelmed by
 are overwhelmed with
-crush
-are crushed by
-obliterate
-are obliterated by
-help
-are helped by
-aid
-receive aid from
-continue
-live with
-continue living with
-try to escape
-try to preserve
-preserve
-escape
-can never escape
-run from
-hide from
 are tormeted by
 are tortured by
-impose
-oppose
-sing the praises of
-join
+battle against
+battle for
+battle with
+can never escape
+continue
+continue living with
+crush
+destroy
+dismantle
+escape
+establish
+fight against
+fight for
 go to war with
+help
+hide from
+impose
+join
+live with
+obliterate
+oppose
+overcome
+preserve
+receive aid from
+repair
+run from
+set up
+sing the praises of
+struggle against
+struggle with
+tear down
+try to escape
+try to preserve
 wage war on

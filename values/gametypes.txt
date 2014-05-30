@@ -1,60 +1,60 @@
-shooter
-brawler
-twin joystick
-bullet hell
-simulator
-stealth
-parkour
-collect-a-thon
-horror
-role-playing
-adventure
 action
-exploration
-atmospheric
+action role-playing
 action-adventure
-survival
-turn-based strategy
-real-time strategy
-puzzle
-tycoon
+adventure
+art
+artillery
 artsy
-beat-em-up
-hack n slash
-board
-racing
-experimental
-propaganda
-roguelike
-sports
+atmospheric
 ball and paddle
-hack and slash
+beat-em-up
+board
+brawler
+bullet hell
+casual
+collect-a-thon
+cyberpunk
+educational
+experimental
+exploration
+fantasy
 fighting
+hack and slash
+hack n slash
+historical
+horror
+linear
 maze
+medieval
+music
+one-button
+open world
+parkour
+party
+pay-to-win
 pinball
 platform
-text-based
-story-based
-role-playing
-action role-playing
-artillery
-tower defense
-casual
-music
-party
-trivia
-pay-to-win
-art
-educational
-open world
-sandbox
-linear
-space
-medieval
 point and click
-sci-fi
-cyberpunk
-one-button
-fantasy
-historical
+propaganda
+puzzle
+racing
 rail shooter
+real-time strategy
+roguelike
+role-playing
+role-playing
+sandbox
+sci-fi
+shooter
+simulator
+space
+sports
+stealth
+story-based
+survival
+text-based
+tower defense
+trivia
+turn-based strategy
+twin joystick
+tycoon

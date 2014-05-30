@@ -1,70 +1,101 @@
-time
-people
-love
-hatred
-security
-fortitude
-wellness
-dependence
-independence
-freedom
-depression
-sanity
-insanity
-The Man
-things
-your feelings
-life
-your life
-the world
-death
-your death
-ruin
-decay
-entropy
-peace
-patience
-world peace
-school
-education
-the idea of family
-The Motherland
-The Fatherland
-problems
-a hard case
-existentialism
+abandonment
+abortion
+absurdity
+abundance
+abuse
+acceptance
+accessibility
+accountability
+action
+addiction
+adolescence
+adultery
+adulthood
+adventure
+advertisement
+affection
+agriculture
+anger
+apathy
+archaeology
+archaism
+archery
+aristocracy
+art
+astronomy
+astrology
+Big Business
 capitalism
 communism
-fascism
-liberalism
+death
+decay
 democracy
-patriotism
-fanatism
-work
-the government
-money
+dependence
+depression
+education
+entropy
+existentialism
 facts
+fanatism
+fascism
 fiction
-rights
-human rights
-Big Business
-issues
-service
-power
-the law
-your community
-the president
-ideas
-the Information Superhighway
-the Internet
-art
-war
-history
-reason
 force
+fortitude
+freedom
 gravity
 grief
+hatred
+history
+human rights
+ideas
+independence
+insanity
+issues
 joy
-strange power
+liberalism
+life
+love
+mistakes
+money
+neglect
+nihilism
+nirvana
+noise
+nonconformity
+novelty
+patience
+patriotism
+peace
+people
+power
 powerlessness
+problems
 rampant corruption
+reason
+rights
+ruin
+sanity
+school
+security
+service
+strange power
+The Fatherland
+the government
+the idea of family
+the Information Superhighway
+the Internet
+the law
+The Man
+The Motherland
+the president
+the world
+things
+time
+war
+wellness
+work
+world peace
+your community
+your death
+your feelings
+your life
