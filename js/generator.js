@@ -276,7 +276,7 @@ function setAndShowHistory(seed, genre, genreIsRemoved) {
 		if (genHistory.length > 6) {
 				genHistory = genHistory.slice(0, 6);
 			}
-		setCookie("history",genHistory,0.5);
+		setCookie("history",genHistory,-1);
 		var historySection = document.getElementById('history');
 		for(var i = 1; i < genHistory.length; i++) {	//Shows last 5 ideas (excluding current idea--starts at genHistory[1])
 			if (genHistory[i] != "") {

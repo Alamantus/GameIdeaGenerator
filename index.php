@@ -72,13 +72,13 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 		</div>
 		
 		<div class="panel panel-default center-block" id="historybox">
+			<a data-toggle="collapse" href="#historyCollapse">
 			<div class="panel-heading" id="historyHeader">
 				<h3 class="panel-title center-block text-center">
-					<a data-toggle="collapse" href="#historyCollapse">
 					History
-					</a>
 				</h3>
 			</div>
+			</a>
 			<div id="historyCollapse" class="panel-collapse collapse">
 				<div class="panel-body" id="history">
 					<script>

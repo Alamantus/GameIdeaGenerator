@@ -55,10 +55,14 @@ function doLockGenreCheckboxStuff () {
 
 function setCookie(cname,cvalue,exdays)
 {
-	var d = new Date();
-	d.setTime(d.getTime()+(exdays*24*60*60*1000));
-	var expires = "expires="+d.toGMTString();
-	document.cookie = cname + "=" + cvalue + "; " + expires;
+	if (exdays > 0) {
+		var d = new Date();
+		d.setTime(d.getTime()+(exdays*24*60*60*1000));
+		var expires = "expires="+d.toGMTString();
+		document.cookie = cname + "=" + cvalue + "; " + expires;
+	} else {
+		document.cookie = cname + "=" + cvalue;
+	}
 }
 function getCookie(cname)
 {
