@@ -11,11 +11,27 @@ archipelago
 aristocracy
 assylum
 attic
+badminton court
+bakery
+balcony
+barn
+barrack
+barrel
 basement
+baseball field
+basket
+basketball court
 bathroom
+battlefield
+battleground
 battlezone
+bazaar
+beach
+beachhead
 bedroom
 bin
+blizzard
+bubble
 can
 can of beans
 can of peas
@@ -27,221 +43,9 @@ castle
 cave
 cemetary
 city
-computer monitor
-cove
-crevasse
-cubicle
-cyberworld
-department store
-dump
-ethernet cable
-forest
-garden
-hospital
-hotel
-house
-kitchen
-living room
-mainframe
-mall
-meadow
-mess of wires
-military base
-monarchy
-mortuary
-mountain
-ocean
-pet store
-pile of garbage
-piping system
-pit
-plaza
-power cord
-produce aisle
-sewer
-shower
-speedboat
-stadium
-street
-supermarket
-telephone wire
-trash can
-video game
-warzone
-wasteland
-yard
-abbey
-aircraft carrier
-alcove
-allegory
-alley
-altar
-amusement park
-anarchy
-apartment complex
-archipelago
-aristocracy
-assylum
-attic
-basement
-bathroom
-battlezone
-bedroom
-bin
-can
-can of beans
-can of peas
-can of soup
-canyon
-car
-cardboard box
-castle
-cave
-cemetary
-city
-computer monitor
-cove
-crevasse
-cubicle
-cyberworld
-department store
-dump
-ethernet cable
-forest
-garden
-hospital
-hotel
-house
-kitchen
-living room
-mainframe
-mall
-meadow
-mess of wires
-military base
-monarchy
-mortuary
-mountain
-ocean
-pet store
-pile of garbage
-piping system
-pit
-plaza
-power cord
-produce aisle
-sewer
-shower
-speedboat
-stadium
-street
-supermarket
-telephone wire
-trash can
-video game
-warzone
-wasteland
-yardabbey
-aircraft carrier
-alcove
-allegory
-alley
-altar
-amusement park
-anarchy
-apartment complex
-archipelago
-aristocracy
-assylum
-attic
-basement
-bathroom
-battlezone
-bedroom
-bin
-can
-can of beans
-can of peas
-can of soup
-canyon
-car
-cardboard box
-castle
-cave
-cemetary
-city
-computer monitor
-cove
-crevasse
-cubicle
-cyberworld
-department store
-dump
-ethernet cable
-forest
-garden
-hospital
-hotel
-house
-kitchen
-living room
-mainframe
-mall
-meadow
-mess of wires
-military base
-monarchy
-mortuary
-mountain
-ocean
-pet store
-pile of garbage
-piping system
-pit
-plaza
-power cord
-produce aisle
-sewer
-shower
-speedboat
-stadium
-street
-supermarket
-telephone wire
-trash can
-video game
-warzone
-wasteland
-yardabbey
-aircraft carrier
-alcove
-allegory
-alley
-altar
-amusement park
-anarchy
-apartment complex
-archipelago
-aristocracy
-assylum
-attic
-basement
-bathroom
-battlezone
-bedroom
-bin
-can
-can of beans
-can of peas
-can of soup
-canyon
-car
-cardboard box
-castle
-cave
-cemetary
-city
-computer monitor
+cloud
+cloud city
+computer screen
 cove
 crevasse
 cubicle
