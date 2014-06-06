@@ -45,7 +45,7 @@ var generatedidea = "";
 	var verbs3rdCall = $.get("values/verbs3rd.txt", function (data) { verbs3rd = data.split("\n"); });
 	var additionsCall = $.get("values/additions.txt", function (data) { additions = data.split("\n"); });
 
-function generatevalues(seed, genre, debug) {	
+function PlaceIdeaOnPage(seed, genre, genreIsRemoved, placementElementID, debug) {
 	//Use the seed given to seed the random numbers
 	if(seed) {
 		Math.seedrandom(seed);
@@ -54,22 +54,26 @@ function generatevalues(seed, genre, debug) {
 	else {
 		Math.seedrandom();
 	}
-	
-	//Use jquery $.when to generate only after each of the word list arrays have been filled.
 	$.when(typesCall, nounsCall, pluralnounsCall, conceptsCall, verbs2ndCall, verbs2ndconceptsCall, verbs3rdCall, adjsCall, locsCall, descsCall, additionsCall).done(function () {
+		//Use jquery $.when to generate only after each of the word list arrays have been filled.
 		generatedidea = "";
-      
-      buildIdea(genre, seed);
-		
+		buildIdea(genre, genreIsRemoved);
+		// generatevalues(seed, genre, genreIsRemoved);
+		//Put the text in the designated area.
+		var ideaPositionOnPage = document.getElementById(placementElementID);
+		ideaPositionOnPage.innerHTML = generatedidea;
 		//Debug
 		if (debug) {
 			var debugpage = document.getElementById('details');
 			debugpage.innerHTML = "gt: " + gt + "<br />n1: " + n1 + "<br />n2: " + n2 + "<br />n3: " + n3 + "<br />n4: " + n4 + "<br />v1: " + v1 + "<br />v2: " + v2 + "<br />a1: " + a1 + "<br />a2: " + a2 + "<br />a3: " + a3 + "<br />a4: " + a4 + "<br />o1: " + o1 + "<br />o2: " + o2 + "<br />o3: " + o3 + "<br />o4: " + o4 + "<br />structure: " + sentencestructure;
 		}
+	}).fail(function() {
+		alert("Can't get word lists. Try again later.");
+		//other stuff here
 	});
 }
 
-function buildIdea(genre, seed) {
+function buildIdea(genre, genreIsRemoved) {
 	//Trim whitespace from before/after noun lists to prevent odd spacing in generated sentences.
 	trimWhitespaceFromLists(nouns, pnouns, locations, concepts);
 	
@@ -77,7 +81,7 @@ function buildIdea(genre, seed) {
 	generateRandomValues();
 	
 	//Set the Genre. If no genre is provided (from genre lock), it is generated.
-	setGenre(genre);
+	setGenre(genre, genreIsRemoved);
 	
 	switch (sentencestructure) {
 		case 0:
@@ -116,12 +120,6 @@ function buildIdea(genre, seed) {
 		generatedidea += additions[add];
 	}
 	generatedidea += "<end />";
-	
-  	//Put the text in the designated area.
-	var ideaPositionOnPage = document.getElementById('ideatext');
-	ideaPositionOnPage.innerHTML = generatedidea;
-  
-  //setHistory(seed);
 }
 
 function trimWhitespaceFromLists(list1, list2, list3, list4) {
@@ -233,40 +231,65 @@ function generateRandomValues() {
 	*/
 }
 
-function setGenre(genre) {
-	generatedidea += "<div id='genre'>";
-	if (genre == '') {
-		if (types[gt].substr(0,1)==="a" || types[gt].substr(0,1)==="e" || types[gt].substr(0,1)==="i" || types[gt].substr(0,1)==="o" || types[gt].substr(0,1)==="u") {
-			generatedidea += "An ";
-		} else {
-			generatedidea += "A ";
-		}
-		generatedidea += types[gt] + " </div>";
+function setGenre(genre, genreIsRemoved) {
+	if (genreIsRemoved == 'on') {
+		generatedidea += "A ";
 	} else {
-		generatedidea += genre + " </div>";		//No need to add an article because it is already there.
+		generatedidea += "<div id='genre'>";
+		if (genre == '') {
+			if (types[gt].substr(0,1)==="a" || types[gt].substr(0,1)==="e" || types[gt].substr(0,1)==="i" || types[gt].substr(0,1)==="o" || types[gt].substr(0,1)==="u") {
+				generatedidea += "An ";
+			} else {
+				generatedidea += "A ";
+			}
+			generatedidea += types[gt] + " </div>";
+		} else {
+			generatedidea += genre + " </div>";		//No need to add an article because it is already there.
+		}
 	}
 	generatedidea += "game where ";
 }
 
-function setHistory(seed) {
-	var genHistory = [];
-	var histCookie = getCookie("history");
-	//histCookie = histCookie.substring(0, histCookie.lastIndexOf("<end />"));
-	if (histCookie != "") {
-		genHistory = histCookie.split("<end />");
-	}
-	genHistory.unshift("Seed: " + seed + " - " + generatedidea);
-	histCookie = "Seed: " + seed + " - " + generatedidea + histCookie;
-	setCookie("history",histCookie,0.5);
-	var sel = document.getElementById('history');
-	for(var i = 0; i < genHistory.length; i++) {
-		if (genHistory[i] != "") {
-			var opt = document.createElement('option');
-			opt.innerHTML = genHistory[i];
-			opt.value = genHistory[i];
-			sel.appendChild(opt);
+function setAndShowHistory(seed, genre, genreIsRemoved) {
+	$.when(typesCall, nounsCall, pluralnounsCall, conceptsCall, verbs2ndCall, verbs2ndconceptsCall, verbs3rdCall, adjsCall, locsCall, descsCall, additionsCall).done(function () {
+		var genHistory = [];
+		var histCookie = getCookie("history");
+		if (histCookie != "") {
+			genHistory = histCookie.split("<end />,");
 		}
-	}
+		for (var i = 0; i < genHistory.length; i++) {
+			if (genHistory[i].indexOf("<end />") == -1) {
+				genHistory[i] += "<end />";
+			}
+		}
+		var currentIdea = "Seed: " + seed;
+		if (genre != '') {
+			currentIdea += ' -- (Genre Locked to "' + genre.trim().replace("A ", "").replace("An ", "") + '")';
+		}
+		if (genreIsRemoved == 'on') {
+			currentIdea += ' -- (Genre Removed)';
+		}
+		currentIdea += '<br />' + generatedidea.replace("<div id='genre'>", "");
+		currentIdea = currentIdea.replace("</div>", "");
+		genHistory.unshift(currentIdea);
+		//Restrict to last 6 generated ideas, including the current idea.
+		if (genHistory.length > 6) {
+				genHistory = genHistory.slice(0, 6);
+			}
+		setCookie("history",genHistory,0.5);
+		var historySection = document.getElementById('history');
+		for(var i = 1; i < genHistory.length; i++) {	//Shows last 5 ideas (excluding current idea--starts at genHistory[1])
+			if (genHistory[i] != "") {
+				// var pastInfo = genHistory[i].split("@separator@");
+				var idText = 'history' + i;
+				var historyParagraphs = '<p id="' + idText + '" onclick="selectText(\'' + idText + '\');">' + genHistory[i] + '</p>';
+				historySection.innerHTML += historyParagraphs;
+				// PlaceIdeaOnPage(pastInfo[0], pastInfo[1], pastInfo[2], 'history' + i.toString(), '');
+				// var historyItem = document.getElementById('history' + i).innerHTML;
+				// historyItem = "Seed: " + pastInfo[0] + " - " + historyItem;		//Rewrite historyItem with seed on front.
+			}
+		}
+	});
 }
 
 function buildSentenceO() {

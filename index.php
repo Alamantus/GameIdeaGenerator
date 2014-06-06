@@ -1,5 +1,5 @@
 <?php
-$version = "0.87";
+$version = "0.9";
 $debug = isset($_GET['debug']) ? true : "";
 $seed = isset($_POST['seed']) ? htmlspecialchars($_POST['seed']) : (string)rand();
 $genrelock = isset($_POST['genrelock']) ? $_POST['genrelock'] : 'off';
@@ -54,8 +54,8 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 		</div>
 		
 		<div class="center-block text-center" id="genreoptions">
-		Lock Genre <input name="genrelock" id="lock" type="checkbox" onclick="if(this.checked){var g=document.getElementById('genre').innerHTML; document.getElementById('genreplaceholder').innerHTML='<input type=\'hidden\' id=\'genrefield\' name=\'lockedgenre\' value=\'' + g + '\' />';}else{document.getElementById('genreplaceholder').innerHTML='';}" /><span id="genreplaceholder"></span>
-		&nbsp;&nbsp;&nbsp;Remove Genre <input name="genreremove" id="remove" type="checkbox" />
+		<div id="lockoption" style="display:inline;">Lock Genre <input name="genrelock" id="lock" type="checkbox" onclick="if(this.checked){document.getElementById('remove').checked=false;var g=document.getElementById('genre').innerHTML; if (g!=null) {document.getElementById('genreplaceholder').innerHTML='<input type=\'hidden\' id=\'genrefield\' name=\'lockedgenre\' value=\'' + g + '\' />';}}else{document.getElementById('genreplaceholder').innerHTML='';}" /></div><span id="genreplaceholder"></span>
+		&nbsp;&nbsp;&nbsp;Remove Genre <input name="genreremove" id="remove" type="checkbox" onclick="if(this.checked){document.getElementById('lock').checked=false;document.getElementById('genreplaceholder').innerHTML = '';}" />
 		</div>
 		
 		<div class="center-block text-center" id="rerollbox"><input id="reroll" type="image" src="images/dice.png" name="submit" onclick="document.getElementById('seedbox').value='';" title="Re-Roll">
@@ -63,14 +63,30 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 		</form>
 
 		<div class="well well-lg bg-bright-green center-block" id="ideabox">
-			<!--<select id="history"></select>-->
 			<p class="center-block text-center" id="ideatext" onclick="selectText('ideatext')">
 			<script>
-				generatevalues('<?php echo $seed; ?>', '<?php echo $genre; ?>', '<?php echo $debug; ?>');
+				PlaceIdeaOnPage('<?php echo $seed; ?>', '<?php echo $genre; ?>', '<?php echo $genreremove; ?>', 'ideatext', '<?php echo $debug; ?>');
 			</script>
 			</p>
 			<p id="details"></p>
 		</div>
+		
+		<div class="panel panel-default center-block" id="historybox">
+			<div class="panel-heading" id="historyHeader">
+				<h3 class="panel-title center-block text-center">
+					<a data-toggle="collapse" href="#historyCollapse">
+					History
+					</a>
+				</h3>
+			</div>
+			<div id="historyCollapse" class="panel-collapse collapse">
+				<div class="panel-body" id="history">
+					<script>
+						setAndShowHistory('<?php echo $seed; ?>', '<?php echo $genre; ?>', '<?php echo $genreremove; ?>');
+					</script>
+				</div>
+			</div>
+		</div>	<!--History Box -->
 		
 		<div class="spacer"></div>
 		<div class="spacer"></div>
