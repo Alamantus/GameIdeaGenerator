@@ -32,15 +32,27 @@ bedroom
 bin
 blizzard
 bubble
+cabana
+cabaret
+cabin
+cabinet
+cafe
+cafeteria
+cage
 can
 can of beans
 can of peas
 can of soup
+cannery
 canyon
 car
 cardboard box
+carriage
+carrier
 castle
+cathedral
 cave
+cellar
 cemetary
 city
 cloud

@@ -124,15 +124,40 @@ bus
 bush
 businessman
 bystander
+cabbage
+cable
+cadaver
+cadet
+cake
+calendar
+caliper
+camel
+camera
+cameraman
 camp
 camper
+candle
+candy
+cane
 cannon
+cannonball
+canoe
+cantaloupe
+canteen
+cape
 captain
 car
 card
+carpenter
+carrot
 carton of milk
+cartridge
 castle
 cat
+celebrity
+cell
+cellist
+cello
 chair
 chemist
 chest
@@ -149,6 +174,7 @@ computer
 corgi
 coroner
 country
+cow
 cup
 desk
 diver
@@ -212,7 +238,7 @@ jar
 jar of jam
 jar of jelly
 javelin
-jobs
+job
 journeyman
 jouster
 judge
