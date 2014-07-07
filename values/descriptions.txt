@@ -29,11 +29,13 @@ destroyed
 deteriorating
 diamond-encrusted
 digital
+dingy
 dirty
 disappearing
 disgusting
 dismal
 distant
+drab
 drafty
 dreary
 edible
@@ -81,6 +83,7 @@ little
 lonely
 lustrous
 luxurious
+messy
 meticulously arranged
 microscopic
 modern

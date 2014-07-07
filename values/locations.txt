@@ -4,9 +4,11 @@ alcove
 allegory
 alley
 altar
+alternate dimension
 amusement park
 anarchy
 apartment complex
+archaeological dig
 archipelago
 aristocracy
 assylum
@@ -54,18 +56,71 @@ cathedral
 cave
 cellar
 cemetary
+chamber
+chapel
+cinema
+cistern
 city
+classroom
+cliff
 cloud
 cloud city
+clown school
+cockpit
+colony
+compound
 computer screen
+concert hall
+corral
+correctional facility
+courthouse
+courtyard
 cove
+crawlspace
+crater
 crevasse
+crypt
+cubby
+cubbyhole
 cubicle
+cupboard
 cyberworld
+deck
+den
 department store
+desert
+dictatorship
+dictionary
+dimensional portal
+ditch
+dock
+doghouse
+dollhouse
+dormitory
+dream
+drugstore
+dugout
 dump
+dungeon
+electromagnet
+elevator
+encyclopedia
+erupting volcano
 ethernet cable
+farm
+farmhouse
+fishery
+fish pond
+flashback
 forest
+forge
+fort
+forum
+fountain
+freeway
+frontier
+funeral home
+furnace
 garden
 hospital
 hotel
