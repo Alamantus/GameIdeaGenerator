@@ -121,10 +121,47 @@ freeway
 frontier
 funeral home
 furnace
+gallery
+garage
 garden
+garrison
+ghetto
+glacier
+grassland
+graveyard
+greenhouse
+grocery store
+grove
+guardhouse
+gulf
+gully
+gutter
+gym
+hall
+hallway
+hamlet
+hangar
+harbor
+hideaway
+hideout
+high school
+highway
+hill
+beehive
 hospital
 hotel
+hot tub
 house
+hovel
+impact site
+improv studio
+inn
+island
+isle
+jail
+jukebox
+jungle
+junkyard
 kitchen
 living room
 mainframe
