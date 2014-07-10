@@ -206,20 +206,42 @@ joy
 justice
 knowledge
 liberalism
+liberty
 life
+liquor
+logic
 love
+machinery
+makeup
+misogyny
+misrepresentation
 mistakes
+modernism
 money
+morals
 neglect
 nihilism
 nirvana
 noise
 nonconformity
+nonsense
+nostalgia
 novelty
+objectification
+oblivion
+obscenity
+omnipotence
+optimism
 patience
 patriotism
 peace
 people
+perfection
+permanence
+pessimism
+philosophy
+photorealism
+physics
 power
 powerlessness
 problems
@@ -242,6 +264,7 @@ the Information Superhighway
 the Internet
 the law
 The Man
+The Moon
 The Motherland
 the president
 the world

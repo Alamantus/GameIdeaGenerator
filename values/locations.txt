@@ -163,17 +163,56 @@ jukebox
 jungle
 junkyard
 kitchen
+laboratory
+labyrinth
+lagoon
+lake
+lavatory
+library
 living room
+locker room
+lodge
+lookout tower
+lounge
+madhouse
 mainframe
 mall
+maple tree
+market
+marketplace
+maze
 meadow
 mess of wires
 military base
+mine
+mineshaft
 monarchy
-mortuary
+monastery
+moon
+mosque
+motel
 mountain
+museum
+newsstand
+nightclub
+nursery
+oak tree
 ocean
+office
+orchard
+orphanage
+outpost
+pagoda
+palace
+palm tree
+parking lot
+party
+peninsula
+penthouse
 pet store
+pharmasy
+picnic
+pier
 pile of garbage
 piping system
 pit
