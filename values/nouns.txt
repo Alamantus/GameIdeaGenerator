@@ -1,11 +1,11 @@
 aardvark
 abbot
 aborigine
-accident
 accent
 accessory
-accomplishment
+accident
 accomplice
+accomplishment
 accountant
 actor
 actress
@@ -163,11 +163,11 @@ chair
 chairman
 champion
 chancellor
-chart
 charriot
 charrioteer
-checklist
+chart
 checker
+checklist
 cheese
 cheetah
 chef
@@ -204,8 +204,8 @@ clown
 club
 coach
 coat
-cockatoo
 cockatiel
+cockatoo
 cocktail
 coffin
 coin
@@ -290,8 +290,8 @@ developer
 devil
 diamond
 diary
-die
 dictator
+die
 digit
 dime
 dinghy
@@ -305,9 +305,9 @@ dissenter
 diver
 doctor
 dog
+doll
 dollar
 dolphin
-doll
 dome
 donkey
 door
@@ -413,8 +413,8 @@ gem
 generator
 genie
 gentleman
-germ
 geranium
+germ
 ghost
 ghoul
 giant
@@ -434,13 +434,14 @@ golfer
 goose
 gorilla
 governor
+grain of rice
 grape
 grapefruit
 graph
 grave
 green bean
-grizzly bear
 grinch
+grizzly bear
 guardian
 guest
 guide
@@ -459,6 +460,7 @@ halo
 ham
 hamburger
 hammer
+hamster
 hand
 handbag
 handgun
@@ -477,6 +479,7 @@ head
 headline
 healer
 heart
+hedgehog
 helecopter
 helmet
 helper
@@ -495,6 +498,7 @@ hill
 hillbilly
 hint
 hipster
+hitchhiker
 hobbit
 hobo
 hockey puck
@@ -514,19 +518,17 @@ host
 hostage
 hound
 huckster
+hunchback
 hunter
 hurricane
 hustler
 hyena
 hymn
-hamster
-hunchback
-hedgehog
-hitchhiker
 ice cube
 idea
 idiot
 idol
+iguana
 image
 infant
 infantryman
@@ -535,8 +537,8 @@ injury
 insect
 inspector
 insult
-intellectual
 integer
+intellectual
 interrogator
 intestine
 intruder
@@ -545,12 +547,11 @@ inventor
 investor
 ion
 iron bar
-iron rod
 iron pot
-iguana
+iron rod
 jacket
-janitor
 jaguar
+janitor
 jar
 jar of jam
 jar of jelly
@@ -602,6 +603,7 @@ lighter
 lime
 line
 list
+llama
 lobster
 lock
 locust
@@ -614,7 +616,6 @@ lumberjack
 lunar lander
 lung
 lure
-llama
 machine
 machine gun
 mackerel
@@ -660,11 +661,14 @@ murderer
 mushroom
 musket
 mystic
+narwal
 nebula
 neck
 necklace
+necromancer
 needle
 net
+neuromancer
 newspaper
 newt
 nightingale
@@ -679,9 +683,6 @@ nurse
 nut
 nutshell
 nymph
-narwal
-necromancer
-neuromancer
 obelisk
 ocarina
 ocelot
@@ -733,11 +734,12 @@ phone
 phonograph
 photograph
 physicist
-piano
 pianist
+piano
 pickaxe
 pickle
 pie
+piece of junk
 pig
 pigeon
 pill
@@ -745,10 +747,10 @@ pillow
 pineapple
 pipe
 pirate
+pirhana
 pistol
 pitchfork
 pizza
-piece of junk
 plane
 plant
 plantain
@@ -763,7 +765,6 @@ poodles
 pork chop
 possum
 potato
-pirhana
 preacher
 predator
 priest
@@ -784,27 +785,27 @@ puppy
 puzzle
 pyromaniac
 python
+quail
+quart
 quartz stone
 queen
 question
-quote
+quiche
 quill
 quilt
 quiver
-quail
-quart
-quiche
+quote
 rabbi
 rabbit
 radiator
 radio
-rag
 radish
+rag
 raisin
 ram
-rapper
 rancher
 rapier
+rapper
 rat
 rattle
 razor
@@ -816,7 +817,6 @@ reporter
 rhyme
 rib
 ribbon
-grain of rice
 rifle
 rifleman
 ring
@@ -831,9 +831,9 @@ rooster
 roulette
 ruler
 rumor
+runaway
 runner
 runt
-runaway
 rutabaga
 saber
 sadist
@@ -852,6 +852,7 @@ scavenger
 scholar
 scientist
 scimitar
+scissors
 scout
 screw
 scribe
@@ -887,6 +888,7 @@ snail
 snake
 sniper
 snowball
+snowman
 sock
 soldier
 song
@@ -896,9 +898,11 @@ spectre
 spell
 spider
 spirit
+spoon
 spring
 spy
 square
+squid
 squire
 squirrel
 stallion
@@ -917,20 +921,17 @@ sweater
 switchblade
 sword
 syringe
-scissors
-squid
-snowman
-spoon
 table
 tablet
+taco
 tail
 task
-teacup
 teacher
+teacup
 telephone
 tent
-thief
 therapist
+thief
 thorn
 thug
 toad
@@ -957,21 +958,20 @@ turret
 turtle
 typewriter
 tyrant
-taco
 umbrella
 umpire
-urn
-usher
 unicorn
 unicycle
+urn
+usher
 vagabond
 vase
 vegetarian
-viking
-villain
-villager
-violin
 vigilante
+viking
+villager
+villain
+violin
 volleyball
 voodoo doll
 vulture
@@ -985,18 +985,18 @@ wanderer
 warlock
 warlord
 warrior
-watchdog
 watch
+watchdog
 watermelon
 web
 week
 whale
-whip
 wheel
+whip
 wildcat
-wing
-wine bottle
 window
+wine bottle
+wing
 wire
 wisp
 witch
@@ -1004,12 +1004,12 @@ wizard
 wolf
 woodpecker
 xylophone
-yoke
 yak
-yo-yo
 yam
 yeti
+yo-yo
+yoke
+zebra
 zipper
 zombie
 zuchini
-zebra

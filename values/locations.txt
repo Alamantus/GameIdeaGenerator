@@ -261,10 +261,10 @@ shower
 skyline
 speedboat
 stable
-stage
 stadium
-storeroom
+stage
 storehouse
+storeroom
 street
 studio
 suburb
@@ -279,9 +279,9 @@ tower
 town
 trash can
 valley
+video game
 village
 vineyard
-video game
 volcano
 warehouse
 warzone
