@@ -1,5 +1,5 @@
 <?php
-$version = "0.9";
+$version = "1.0";
 $debug = isset($_GET['debug']) ? true : "";
 $seed = isset($_POST['seed']) ? htmlspecialchars($_POST['seed']) : (string)rand();
 $genrelock = isset($_POST['genrelock']) ? $_POST['genrelock'] : 'off';
@@ -16,7 +16,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
   <meta charset="utf-8">
 
   <title>Insanity Jam Official Game Idea Generator, v. <?php echo $version ?></title>
-  <meta name="description" content="Custom-built Idea Generator for use in the semi-anual Insanity Jam game development jam.">
+  <meta name="description" content="Custom-built Idea Generator for use in the quarterly Insanity Jam game development jam.">
   <meta name="author" content="Alamantus GameDev, gamedev@alamantus.com">
   <meta name="web_author" content="Alamantus GameDev, gamedev@alamantus.com">
   <meta name="robots" content="index, nofollow" />
