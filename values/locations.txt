@@ -19,8 +19,8 @@ balcony
 barn
 barrack
 barrel
-basement
 baseball field
+basement
 basket
 basketball court
 bathroom
@@ -31,6 +31,7 @@ bazaar
 beach
 beachhead
 bedroom
+beehive
 bin
 blizzard
 bubble
@@ -76,8 +77,8 @@ correctional facility
 courthouse
 courtyard
 cove
-crawlspace
 crater
+crawlspace
 crevasse
 crypt
 cubby
@@ -109,8 +110,8 @@ erupting volcano
 ethernet cable
 farm
 farmhouse
-fishery
 fish pond
+fishery
 flashback
 forest
 forge
@@ -147,10 +148,9 @@ hideout
 high school
 highway
 hill
-beehive
 hospital
-hotel
 hot tub
+hotel
 house
 hovel
 impact site
@@ -214,20 +214,78 @@ pharmasy
 picnic
 pier
 pile of garbage
+pine tree
+pipeline
 piping system
 pit
+planetarium
+planetoid
+plateau
+platform
+playroom
 plaza
+police department
+pond
+poplar tree
+portal
 power cord
+power plant
+prison
 produce aisle
+pub
+pulpit
+purification chamber
+pyramid
+quarry
+racetrack
+railroad
+rehab center
+resort
+restaurant
+river
+road
+room
+rose bush
+runway
+salon
+saloon
+sawmill
+school
+sculpture
+sea
+seacoast
 sewer
+shack
+shop
 shower
+skyline
 speedboat
+stable
+stage
 stadium
+storeroom
+storehouse
 street
+studio
+suburb
+subway
 supermarket
+swamp
+synagogue
 telephone wire
+tollhouse
+tomb
+tower
+town
 trash can
+valley
+village
+vineyard
 video game
+volcano
+warehouse
 warzone
 wasteland
+windmill
 yard
+zeppelin

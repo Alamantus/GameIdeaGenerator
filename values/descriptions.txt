@@ -6,6 +6,8 @@ barren
 beautiful
 big
 bland
+blessed
+blighted
 boring
 bright
 bustling
@@ -13,9 +15,9 @@ busy
 cavernous
 clean
 cloudy
-complicated
 collapsing
 colorful
+complicated
 confusing
 constantly-changing
 corrupt
@@ -52,9 +54,9 @@ expansive
 falling
 far-off
 faraway
+fearfully constructed
 fiery
 filthy
-fearfully constructed
 flaming
 flawless
 flimsy
@@ -101,17 +103,30 @@ old-fashioned
 ominous
 ornate
 pagan
+plagued
+planked
+plastic
+platinum
+pleasant
+plush
 quaint
+quilted
 remote
+restored
 rotting
-rundown
 ruby-encrusted
+rundown
 secret
 shadowy
 shady
 shimmering
 small
+smelly
+smoking
+smoldering
 spinning
+stone
+stony
 stormy
 submerged
 suspicious
@@ -130,4 +145,5 @@ unholy
 watery
 well-lit
 well-made
+wooded
 wooden
