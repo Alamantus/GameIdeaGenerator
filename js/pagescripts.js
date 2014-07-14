@@ -14,20 +14,11 @@ var hints = [];
 var h = 0;
 var hintsCall = $.get("values/hints.txt", function (data) { hints = data.split("\n"); });
 
-/* var generatedSeed = Math.random().toString().substring(2,13);
-var seedBox = document.getElementById("seedbox");
-var lockGenre = document.getElementById("genrelock");
-var genreLockedTo = "";
-function regenerate() {
-	generatedSeed = Math.random().toString().substring(2,13);
-	seedBox.value = generatedSeed;
-	
-	PlaceIdeaOnPage(generatedSeed, genreLockedTo, false, 'ideatext', 'off');
-} */
-
 function getNewHint() {
-	h = Math.floor(Math.random() * hints.length);
-	document.getElementById('hinttext').innerHTML = hints[h];
+	$.when(hintsCall).done(function () {
+		h = Math.floor(Math.random() * hints.length);
+		document.getElementById('hinttext').innerHTML = hints[h];
+	});
 }
 
 function addGenreDropdown() {		//Doesn't seem to work from this file
@@ -85,6 +76,25 @@ function getCookie(cname)
 		if (c.indexOf(name)==0) return c.substring(name.length,c.length);
 	}
 	return "";
+}
+
+function lockTheGenre() {
+	if (document.getElementById('lock').checked) {
+		document.getElementById('remove').checked = false;
+		var g = document.getElementById('genre').innerHTML;
+		if (g != null) {
+			document.getElementById('genreplaceholder').innerHTML = g;
+		}
+	} else {
+		document.getElementById('genreplaceholder').innerHTML = '';
+	}
+}
+
+function removeTheGenre() {
+	if (document.getElementById('remove').checked) {
+		document.getElementById('lock').checked = false;
+		document.getElementById('genreplaceholder').innerHTML = '';
+	}
 }
 
 function pageLoadFunctions(lock, genre, remove) {

@@ -62,9 +62,17 @@ function PlaceIdeaOnPage(randomize, debug) {
 		seedBox.value = generatedSeed;
 	}
 	if (lockGenre.checked) {
-		genreLockedTo = document.getElementById('genrefield').innerHTML;
+		genreLockedTo = document.getElementById('genreplaceholder').innerHTML;
 	} else {
 		genreLockedTo = "";
+	}
+	if (removeGenre.checked) {
+		document.getElementById('lockoption').innerHTML = "<span title='There is no genre to lock.\nUncheck &ldquo;Remove Genre&rdquo; and Generate or Re-Roll to get a genre.' style='color:gray;'>Lock Genre <span class='glyphicon glyphicon-remove-circle' style='font-size:80%;'><input name='genrelock' id='lock' type='checkbox' class='hidden' /></span></span>";
+		document.getElementById('genreplaceholder').innerHTML = "";
+	} else {
+		if (!lockGenre.checked) {
+			document.getElementById('lockoption').innerHTML = 'Lock Genre <input name="genrelock" id="lock" type="checkbox" onclick="lockTheGenre();" />';
+		}
 	}
 	
 	//Use the seed given to seed the random numbers
@@ -304,17 +312,18 @@ function setAndShowHistory(seed, genre, genreIsRemoved) {
 			}
 		setCookie("history",genHistory,-1);
 		var historySection = document.getElementById('history');
+		var historyParagraphs = "";
 		for(var i = 1; i < genHistory.length; i++) {	//Shows last 5 ideas (excluding current idea--starts at genHistory[1])
 			if (genHistory[i] != "") {
 				// var pastInfo = genHistory[i].split("@separator@");
 				var idText = 'history' + i;
-				var historyParagraphs = '<p id="' + idText + '" onclick="selectText(\'' + idText + '\');">' + genHistory[i] + '</p>';
-				historySection.innerHTML += historyParagraphs;
+				historyParagraphs += '<p id="' + idText + '" class="clickable" title="Click to Highlight for easy copying" onclick="selectText(\'' + idText + '\');">' + genHistory[i] + '</p>';
 				// PlaceIdeaOnPage(pastInfo[0], pastInfo[1], pastInfo[2], 'history' + i.toString(), '');
 				// var historyItem = document.getElementById('history' + i).innerHTML;
 				// historyItem = "Seed: " + pastInfo[0] + " - " + historyItem;		//Rewrite historyItem with seed on front.
 			}
 		}
+		historySection.innerHTML = historyParagraphs;
 	});
 }
 
@@ -673,14 +682,14 @@ function AddNounPiece(adjectiveNumber, nounNumber, verbNumber) {		//Use -1 to ex
 		}
 	}
 	if (o4 < 5) {
-		generatedidea += nouns[nounNumber] + " ";
+		generatedidea += nouns[nounNumber];
 		if (verbNumber >= 0) {
-			generatedidea += verbs3rd[verbNumber] + " ";
+			generatedidea += " " + verbs3rd[verbNumber] + " ";
 		}
 	} else {
-		generatedidea += pnouns[nounNumber] + " ";
+		generatedidea += pnouns[nounNumber];
 		if (verbNumber >= 0) {
-			generatedidea += verbs2nd[verbNumber] + " ";
+			generatedidea += " " + verbs2nd[verbNumber] + " ";
 		}
 	}
 }
