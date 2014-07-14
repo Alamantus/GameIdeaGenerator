@@ -45,10 +45,31 @@ var verbs2ndconceptsCall = $.get("values/verbs2ndconcepts.txt", function (data) 
 var verbs3rdCall = $.get("values/verbs3rd.txt", function (data) { verbs3rd = data.split("\n"); });
 var additionsCall = $.get("values/additions.txt", function (data) { additions = data.split("\n"); });
 
-function PlaceIdeaOnPage(seed, genre, genreIsRemoved, placementElementID, debug) {
+var generatedSeed, ideaPositionOnPage, seedBox, lockGenre, genreLockedTo, removeGenre;
+
+function PlaceIdeaOnPage(randomize, debug) {
+	generatedSeed = Math.random().toString().substring(2,13);
+	ideaPositionOnPage = document.getElementById('ideatext');
+	seedBox = document.getElementById('seedbox');
+	lockGenre = document.getElementById('lock');
+	genreLockedTo = "";
+	removeGenre = document.getElementById('remove');
+	//Prepare all the values from the page
+	if (randomize) {
+		seedBox.value = "";
+	}
+	if (seedBox.value == '') {
+		seedBox.value = generatedSeed;
+	}
+	if (lockGenre.checked) {
+		genreLockedTo = document.getElementById('genrefield').innerHTML;
+	} else {
+		genreLockedTo = "";
+	}
+	
 	//Use the seed given to seed the random numbers
-	if(seed) {
-		Math.seedrandom(seed);
+	if (seedBox.value) {
+		Math.seedrandom(seedBox.value);
 	}
 	//Give a failsafe in case a seed somehow doesn't come over.
 	else {
@@ -57,11 +78,11 @@ function PlaceIdeaOnPage(seed, genre, genreIsRemoved, placementElementID, debug)
 	$.when(typesCall, nounsCall, pluralnounsCall, conceptsCall, verbs2ndCall, verbs2ndconceptsCall, verbs3rdCall, adjsCall, locsCall, descsCall, additionsCall).done(function () {
 		//Use jquery $.when to generate only after each of the word list arrays have been filled.
 		generatedidea = "";
-		buildIdea(genre, genreIsRemoved);
+		buildIdea(genreLockedTo, removeGenre.checked);
 		// generatevalues(seed, genre, genreIsRemoved);
 		//Put the text in the designated area.
-		var ideaPositionOnPage = document.getElementById(placementElementID);
 		ideaPositionOnPage.innerHTML = generatedidea;
+		setAndShowHistory(seedBox.value, genreLockedTo, removeGenre.checked);
 		//Debug
 		if (debug) {
 			var debugpage = document.getElementById('details');
@@ -237,7 +258,7 @@ function generateRandomValues() {
 }
 
 function setGenre(genre, genreIsRemoved) {
-	if (genreIsRemoved == 'on') {
+	if (genreIsRemoved) {
 		generatedidea += "A ";
 	} else {
 		generatedidea += "<div id='genre'>";
@@ -271,7 +292,7 @@ function setAndShowHistory(seed, genre, genreIsRemoved) {
 		if (genre != '') {
 			currentIdea += ' -- (Genre Locked to "' + genre.trim().replace("A ", "").replace("An ", "") + '")';
 		}
-		if (genreIsRemoved == 'on') {
+		if (genreIsRemoved) {
 			currentIdea += ' -- (Genre Removed)';
 		}
 		currentIdea += '<br />' + generatedidea.replace("<div id='genre'>", "");

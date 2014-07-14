@@ -14,6 +14,17 @@ var hints = [];
 var h = 0;
 var hintsCall = $.get("values/hints.txt", function (data) { hints = data.split("\n"); });
 
+/* var generatedSeed = Math.random().toString().substring(2,13);
+var seedBox = document.getElementById("seedbox");
+var lockGenre = document.getElementById("genrelock");
+var genreLockedTo = "";
+function regenerate() {
+	generatedSeed = Math.random().toString().substring(2,13);
+	seedBox.value = generatedSeed;
+	
+	PlaceIdeaOnPage(generatedSeed, genreLockedTo, false, 'ideatext', 'off');
+} */
+
 function getNewHint() {
 	h = Math.floor(Math.random() * hints.length);
 	document.getElementById('hinttext').innerHTML = hints[h];

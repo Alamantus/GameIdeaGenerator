@@ -1,13 +1,13 @@
 <?php
-$version = "1.0";
+$version = "1.1";
 $debug = isset($_GET['debug']) ? true : "";
-$seed = isset($_POST['seed']) ? htmlspecialchars($_POST['seed']) : (string)rand();
+/* $seed = isset($_POST['seed']) ? htmlspecialchars($_POST['seed']) : (string)rand();
 $genrelock = isset($_POST['genrelock']) ? $_POST['genrelock'] : 'off';
 $genreremove = isset($_POST['genreremove']) ? $_POST['genreremove'] : 'off';
 $genre = isset($_POST["lockedgenre"]) ? $_POST["lockedgenre"] : "";
 if ($seed == "") {
 	$seed = (string)rand();
-}
+} */
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 ?>
@@ -48,9 +48,9 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 	</div>
 	<div class="panel-body">
 		<form id="setseed" method="post">
-		<div class="center-block text-center" id="seedentry">Seed: <input id="seedbox" name="seed" value="<?php echo $seed; ?>" onclick="this.select()" /> <input id="seedchange" type="submit" value="Generate!" />
+		<div class="center-block text-center" id="seedentry">Seed: <input id="seedbox" name="seed" value="" onclick="this.select()" /> <a id="seedchange" onclick="PlaceIdeaOnPage(false, '<?php echo $debug; ?>');">Generate!</a>
 		<br /><small class="clickable" onclick="javascript:$('#rescuedseed').toggleClass('hidden');">(Click here if the box is blank to recover the seed.)</small><br />
-		<span id="rescuedseed" class="hidden" onclick="selectText('rescuedseed')"><?php echo $seed; ?></span>
+		<span id="rescuedseed" class="hidden" onclick="selectText('rescuedseed')"><script>document.write(generatedSeed);</script></span>
 		</div>
 		
 		<div class="center-block text-center" id="genreoptions">
@@ -58,14 +58,14 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 		&nbsp;&nbsp;&nbsp;Remove Genre <input name="genreremove" id="remove" type="checkbox" onclick="if(this.checked){document.getElementById('lock').checked=false;document.getElementById('genreplaceholder').innerHTML = '';}" />
 		</div>
 		
-		<div class="center-block text-center" id="rerollbox"><input id="reroll" type="image" src="images/dice.png" name="submit" onclick="document.getElementById('seedbox').value='';" title="Re-Roll">
+		<div class="center-block text-center" id="rerollbox"><a id="reroll" type="image" src="images/dice.png" onclick="PlaceIdeaOnPage(true, '<?php echo $debug; ?>');" title="Re-Roll">Re-Roll</a>
 		</div>
 		</form>
 
 		<div class="well well-lg bg-bright-green center-block" id="ideabox">
 			<p class="center-block text-center" id="ideatext" onclick="selectText('ideatext')">
 			<script>
-				PlaceIdeaOnPage('<?php echo $seed; ?>', '<?php echo $genre; ?>', '<?php echo $genreremove; ?>', 'ideatext', '<?php echo $debug; ?>');
+				PlaceIdeaOnPage(true, '<?php echo $debug; ?>');
 			</script>
 			</p>
 			<p id="details"></p>
@@ -82,7 +82,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 			<div id="historyCollapse" class="panel-collapse collapse">
 				<div class="panel-body" id="history">
 					<script>
-						setAndShowHistory('<?php echo $seed; ?>', '<?php echo $genre; ?>', '<?php echo $genreremove; ?>');
+						//setAndShowHistory(seedBox.value, genreLockedTo, removeGenre.checked);
 					</script>
 				</div>
 			</div>
@@ -112,7 +112,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 </div>	<!--Row-->
 
 <script>
-	pageLoadFunctions('<?php echo $genrelock; ?>', '<?php echo $genre; ?>', '<?php echo $genreremove; ?>');
+	//pageLoadFunctions('<?php echo $genrelock; ?>', '<?php echo $genre; ?>', '<?php echo $genreremove; ?>');
 </script>
 
 <?php
