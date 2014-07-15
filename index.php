@@ -1,13 +1,6 @@
 <?php
 $version = "1.1";
 $debug = isset($_GET['debug']) ? true : "";
-/* $seed = isset($_POST['seed']) ? htmlspecialchars($_POST['seed']) : (string)rand();
-$genrelock = isset($_POST['genrelock']) ? $_POST['genrelock'] : 'off';
-$genreremove = isset($_POST['genreremove']) ? $_POST['genreremove'] : 'off';
-$genre = isset($_POST["lockedgenre"]) ? $_POST["lockedgenre"] : "";
-if ($seed == "") {
-	$seed = (string)rand();
-} */
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 ?>
@@ -34,8 +27,8 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
   <![endif]-->
   <script src="js/jquery-1.11.0.min.js"></script>
   <script src="js/seedrandom.min.js"></script>
-  <script src="js/pagescripts.js"></script>
-  <script src="js/generator.js"></script>
+  <script src="js/pagescripts.min.js"></script>
+  <script src="js/generator.min.js"></script>
 </head>
 
 <body>
@@ -52,8 +45,8 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 		</div>
 		
 		<div class="center-block text-center" id="genreoptions">
-		<div id="lockoption" style="display:inline;">Lock Genre <input name="genrelock" id="lock" type="checkbox" onclick="lockTheGenre();" /></div><span id="genreplaceholder" class="hidden"></span>
-		&nbsp;&nbsp;&nbsp;Remove Genre <input name="genreremove" id="remove" type="checkbox" onclick="removeTheGenre();" />
+		<div id="lockoption" style="display:inline;">Lock Genre <input name="genrelock" id="lock" class="clickable" type="checkbox" onclick="lockTheGenre();" /></div><span id="genreplaceholder" class="hidden"></span>
+		&nbsp;&nbsp;&nbsp;Remove Genre <input name="genreremove" id="remove" class="clickable" type="checkbox" onclick="removeTheGenre();" />
 		</div>
 		
 		<div class="center-block text-center" id="rerollbox"><img id="reroll" class="clickable" src="images/dice.png" onclick="PlaceIdeaOnPage(true, '<?php echo $debug; ?>');" title="Re-Roll" />

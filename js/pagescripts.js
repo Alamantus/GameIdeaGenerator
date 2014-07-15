@@ -10,6 +10,17 @@ function selectText(containerid) {
 	}
 }
 
+function htmlspecialchars(str) {
+	if (typeof(str) == "string") {
+		str = str.replace(/&/g, "&amp;");
+		str = str.replace(/"/g, "&quot;");
+		str = str.replace(/'/g, "&#039;");
+		str = str.replace(/</g, "&lt;");
+		str = str.replace(/>/g, "&gt;");
+	}
+	return str;
+}
+
 var hints = [];
 var h = 0;
 var hintsCall = $.get("values/hints.txt", function (data) { hints = data.split("\n"); });

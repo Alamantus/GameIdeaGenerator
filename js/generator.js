@@ -71,7 +71,7 @@ function PlaceIdeaOnPage(randomize, debug) {
 		document.getElementById('genreplaceholder').innerHTML = "";
 	} else {
 		if (!lockGenre.checked) {
-			document.getElementById('lockoption').innerHTML = 'Lock Genre <input name="genrelock" id="lock" type="checkbox" onclick="lockTheGenre();" />';
+			document.getElementById('lockoption').innerHTML = 'Lock Genre <input name="genrelock" id="lock" class="clickable" type="checkbox" onclick="lockTheGenre();" />';
 		}
 	}
 	
@@ -296,7 +296,7 @@ function setAndShowHistory(seed, genre, genreIsRemoved) {
 				genHistory[i] += "<end />";
 			}
 		}
-		var currentIdea = "Seed: " + seed;
+		var currentIdea = "Seed: " + htmlspecialchars(seed);
 		if (genre != '') {
 			currentIdea += ' -- (Genre Locked to "' + genre.trim().replace("A ", "").replace("An ", "") + '")';
 		}
@@ -315,12 +315,8 @@ function setAndShowHistory(seed, genre, genreIsRemoved) {
 		var historyParagraphs = "";
 		for(var i = 1; i < genHistory.length; i++) {	//Shows last 5 ideas (excluding current idea--starts at genHistory[1])
 			if (genHistory[i] != "") {
-				// var pastInfo = genHistory[i].split("@separator@");
 				var idText = 'history' + i;
 				historyParagraphs += '<p id="' + idText + '" class="clickable" title="Click to Highlight for easy copying" onclick="selectText(\'' + idText + '\');">' + genHistory[i] + '</p>';
-				// PlaceIdeaOnPage(pastInfo[0], pastInfo[1], pastInfo[2], 'history' + i.toString(), '');
-				// var historyItem = document.getElementById('history' + i).innerHTML;
-				// historyItem = "Seed: " + pastInfo[0] + " - " + historyItem;		//Rewrite historyItem with seed on front.
 			}
 		}
 		historySection.innerHTML = historyParagraphs;
