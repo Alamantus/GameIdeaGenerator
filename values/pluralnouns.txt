@@ -323,7 +323,7 @@ drivers
 drones
 drums
 drunks
-duck
+ducks
 dwarves
 eagles
 ears
