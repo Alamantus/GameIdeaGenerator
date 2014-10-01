@@ -40,9 +40,11 @@ blasphemy
 bloodlust
 bloodshed
 boasting
+Bonnie and Clyde
 botany
 breakfast
 bureaucracy
+Caesar
 calamity
 calculus
 calligraphy
@@ -150,6 +152,7 @@ geocentrism
 geology
 geometry
 glory
+God
 gossip
 graffiti
 gravity
@@ -197,6 +200,7 @@ insomnia
 inspiration
 isolation
 issues
+Jack the Ripper
 jealousy
 journalism
 joy
@@ -216,6 +220,7 @@ mistakes
 modernism
 money
 morals
+Napoleon
 neglect
 nihilism
 nirvana
@@ -267,20 +272,30 @@ self-gratification
 service
 socialism
 strange power
+terror
+terrorism
 the caste system
 The Crusades
 The Devil
+the Emperor
 The Fatherland
+the gods
 the government
+the Huns
 the idea of family
 the Information Superhighway
 the Internet
+the King
 the law
 The Man
 The Moon
 The Motherland
+the Pantheon
 The Plague
+the Pope
 the president
+the Queen
+The Terrorists
 the world
 theocracy
 things
@@ -288,6 +303,7 @@ time
 traditions
 trivia
 trust
+tyranny
 unlimited bandwidth
 war
 wellness

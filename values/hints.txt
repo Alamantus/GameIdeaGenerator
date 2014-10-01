@@ -1,3 +1,4 @@
+If you need quick and easy fantasy or sci-fi writing, there's a langauge called Zirka that you can use in your game! Check out <a href="http://zirka-language.tumblr.com" target="_blank">the official website</a> to learn how to use it!
 Clicking the game idea text <small>(from a computer)</small> will select all of it so you can copy it more easily!
 The History box saves up to 5 previously-generated ideas, using browser cookies. They're designed to only last as long as your browser session, so be sure to save any you like before you close your browser!
 Checking the "Lock Genre" box will keep the game type for future idea generations! <small>(It doesn't work retroactively, though.)</small>
@@ -13,4 +14,5 @@ Checking the "Remove Genre" box will remove the genre from your game idea, givin
 If you generate a game idea that you really like, but you don't like the genre that was generated for it, you can check "Remove Genre" and re-generate the seed you used to get your idea without the genre!
 The reason we don't just give you a drop-down of all the possible genre options is to try to get you to experiment with genres you may be less comfortable with.
 The History box <em>could</em> save more ideas, but Alamantus didn't want to clog up your browser's cookies with too much text.
-You can suggest ideas for the Idea Generator, and we hope you do! Send us sentence structures or ideas for new features and we'll do our best to add them!
+You can suggest ideas for the Idea Generator, and we hope you do! Go to <a href="http://blog.insanityjam.com/submit" target="_blank">http://blog.insanityjam.com/submit</a> to send us sentence structures or ideas for new features and we'll do our best to add them!
+Want a word added to the generator that you don't think is in the word lists? Go to <a href="http://blog.insanityjam.com/submit" target="_blank">http://blog.insanityjam.com/submit</a> to send us a list and we'll do our best to add them!

@@ -12,6 +12,7 @@ board
 brawler
 bullet hell
 casual
+castle defense
 collect-a-thon
 cyberpunk
 educational
@@ -23,9 +24,11 @@ hack and slash
 hack n slash
 historical
 horror
+layered
 linear
 maze
 medieval
+multi-leveled
 music
 one-button
 open world
@@ -35,7 +38,6 @@ pay-to-win
 pinball
 platform
 point and click
-propaganda
 puzzle
 racing
 rail shooter
@@ -47,11 +49,14 @@ sandbox
 sci-fi
 shooter
 simulator
+single-screen
 space
 sports
 stealth
 story-based
 survival
+tactics
+tactical shooter
 text-based
 tower defense
 trivia

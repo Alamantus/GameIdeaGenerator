@@ -399,3 +399,5 @@ wrestle
 write about
 yawn at
 yell at
+zap
+zoom in on

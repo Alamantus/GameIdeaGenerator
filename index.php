@@ -1,5 +1,5 @@
 <?php
-$version = "1.1";
+$version = "1.15";
 $debug = isset($_GET['debug']) ? true : "";
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
