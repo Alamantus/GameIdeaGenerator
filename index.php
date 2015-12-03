@@ -1,20 +1,22 @@
 <?php
-$version = "1.15";
+$version = "1.16";
 $debug = isset($_GET['debug']) ? true : "";
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 ?>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Insanity Jam Official Game Idea Generator, v. <?php echo $version ?></title>
-  <meta name="description" content="Custom-built Idea Generator for use in the quarterly Insanity Jam game development jam.">
-  <meta name="author" content="Alamantus GameDev, gamedev@alamantus.com">
-  <meta name="web_author" content="Alamantus GameDev, gamedev@alamantus.com">
-  <meta name="robots" content="index, nofollow" />
-  <meta name="language" content="english">
-  <meta name="reply-to" content="gamedev@alamantus.com">
+    <title>Insanity Jam Official Game Idea Generator, v. <?php echo $version ?></title>
+    <meta name="description" content="Custom-built Idea Generator for use in the quarterly Insanity Jam game development jam.">
+    <meta name="author" content="Alamantus GameDev, gamedev@alamantus.com">
+    <meta name="web_author" content="Alamantus GameDev, gamedev@alamantus.com">
+    <meta name="robots" content="index, nofollow" />
+    <meta name="language" content="english">
+    <meta name="reply-to" content="gamedev@alamantus.com">
   
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -41,10 +43,10 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 	</div>
 	<div class="panel-body">
 		<form id="setseed" method="post">
-		<div class="center-block text-center" id="seedentry">Seed: <input id="seedbox" name="seed" value="" onclick="this.select()" /> <strong id="seedchange" class="clickable" onclick="PlaceIdeaOnPage(false, '<?php echo $debug; ?>');">Generate!</strong>
+		<div class="center-block text-center" id="seedentry">Seed: <input id="seedbox" name="seed" value="" onclick="this.select()" onkeydown="if (event.keyCode == 13) {PlaceIdeaOnPage(false, '<?php echo $debug; ?>'); return false;}" /> <strong id="seedchange" class="clickable" onclick="PlaceIdeaOnPage(false, '<?php echo $debug; ?>');">Generate!</strong>
 		</div>
 		
-		<div class="center-block text-center" id="genreoptions">
+		<div class="center-block text-center" id="genreoptions" style="display:none;">
 		<div id="lockoption" style="display:inline;">Lock Genre <input name="genrelock" id="lock" class="clickable" type="checkbox" onclick="lockTheGenre();" /></div><span id="genreplaceholder" class="hidden"></span>
 		&nbsp;&nbsp;&nbsp;Remove Genre <input name="genreremove" id="remove" class="clickable" type="checkbox" onclick="removeTheGenre();" />
 		</div>
@@ -55,9 +57,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
 		<div class="well well-lg bg-bright-green center-block" id="ideabox">
 			<p class="center-block text-center" id="ideatext" onclick="selectText('ideatext')">
-			<script>
-				PlaceIdeaOnPage(true, '<?php echo $debug; ?>');
-			</script>
+			Click the Dice or Enter a Seed to Generate!
 			</p>
 			<p id="details"></p>
 		</div>
@@ -94,7 +94,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 		
 	</div>
 	<div class="panel-footer">
-		<p>Problem with the generator? Idea for the generator? Report it to the <a href="https://bitbucket.org/alamantusgamedev/game-idea-generator" target="_blank">Issue Tracker</a>!</p>
+		<?php include "$root/includes/generator_footer.php"; ?>
 	</div>
 </div>	<!--Primary Panel-->
 </div>	<!--Row-->

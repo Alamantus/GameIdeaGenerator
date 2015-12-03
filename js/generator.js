@@ -55,12 +55,13 @@ function PlaceIdeaOnPage(randomize, debug) {
 	genreLockedTo = "";
 	removeGenre = document.getElementById('remove');
 	//Prepare all the values from the page
-	if (randomize) {
-		seedBox.value = "";
-	}
-	if (seedBox.value == '') {
+	if (randomize || seedBox.value == '') {
 		seedBox.value = generatedSeed;
 	}
+    
+    if (!$('#genreoptions').is(':visible')) {  
+        $('#genreoptions').show(700);  
+    };
 	if (lockGenre.checked) {
 		genreLockedTo = document.getElementById('genreplaceholder').innerHTML;
 	} else {
@@ -81,7 +82,7 @@ function PlaceIdeaOnPage(randomize, debug) {
 	}
 	//Give a failsafe in case a seed somehow doesn't come over.
 	else {
-		Math.seedrandom();
+		Math.seedrandom(generatedSeed);
 	}
 	$.when(typesCall, nounsCall, pluralnounsCall, conceptsCall, verbs2ndCall, verbs2ndconceptsCall, verbs3rdCall, adjsCall, locsCall, descsCall, additionsCall).done(function () {
 		//Use jquery $.when to generate only after each of the word list arrays have been filled.
@@ -94,7 +95,7 @@ function PlaceIdeaOnPage(randomize, debug) {
 		//Debug
 		if (debug) {
 			var debugpage = document.getElementById('details');
-			debugpage.innerHTML = "gt: " + gt + "<br />n1: " + n1 + "<br />n2: " + n2 + "<br />n3: " + n3 + "<br />n4: " + n4 + "<br />v1: " + v1 + "<br />v2: " + v2 + "<br />a1: " + a1 + "<br />a2: " + a2 + "<br />a3: " + a3 + "<br />a4: " + a4 + "<br />o1: " + o1 + "<br />o2: " + o2 + "<br />o3: " + o3 + "<br />o4: " + o4 + "<br />structure: " + sentencestructure;
+			debugpage.innerHTML = "gt: " + gt + "<br />n1: " + n1 + "<br />n2: " + n2 + "<br />n3: " + n3 + "<br />n4: " + n4 + "<br />c: " + c + "<br />l: " + l + "<br />v1: " + v1 + "<br />v2: " + v2 + "<br />vc: " + vc + "<br />a1: " + a1 + "<br />a2: " + a2 + "<br />a3: " + a3 + "<br />a4: " + a4 + "<br />d: " + d + "<br />o1: " + o1 + "<br />o2: " + o2 + "<br />o3: " + o3 + "<br />o4: " + o4 + "<br />structure: " + sentencestructure;
 		}
 	}).fail(function() {
 		alert("Can't get word lists. Try again later.");
@@ -139,6 +140,15 @@ function buildIdea(genre, genreIsRemoved) {
 			break;
 		case 8:
 			buildSentence8();
+			break;
+		case 9:
+			buildSentence9();
+			break;
+		case 10:
+			buildSentence10();
+			break;
+		case 11:
+			buildSentence11();
 			break;
 	}
 	generatedidea = generatedidea.trim();
@@ -251,7 +261,7 @@ function generateRandomValues() {
 	o4=Math.floor(Math.random() * 10);		//Select Plural or Single noun.
 	
 	//Select the sentence structure. The multiplier is equal to the number of sentence structures there are to choose from.
-	sentencestructure=Math.floor(Math.random() * 9);
+	sentencestructure=Math.floor(Math.random() * 11);
 	/*	"A [type] game where..."
 		0: "a [adj] [noun] [verb] a [adj] [noun] while a [adj] [noun] [verb] a [adj] [noun]."
 		1: "a [adj] [noun] [verb] a [adj] [noun] in a [desc] [location] while a [adj] [noun] [verb] a [adj] [noun]."
@@ -262,6 +272,8 @@ function generateRandomValues() {
 		6: "you [verb] a [adj] [noun] in a [desc] [location] to win a [adj] [noun]."
 		7: "you [verb(concept)] [concept] ( while a [adj] [noun] [verb] a [adj] [noun])."
 		8: "you [verb(concept)] [concept] with a [adj] [noun]."
+		9: "you explore a [desc] [location] with a [adj] [noun]."
+		10: "a [adj] [noun] explore a [desc] [location] with a [adj] [noun]."
 	*/
 }
 
@@ -654,6 +666,127 @@ function buildSentence8() {
 		} else {
 			generatedidea += pnouns[n3];
 		}
+	}
+}
+
+function buildSentence9() {
+/* "you explore a [desc] [location] with a [adj] [noun]." */
+	generatedidea += "you ";
+	
+	generatedidea += "explore ";
+
+	if (d >= 0) {
+		if (descriptions[d].substr(0,1)==="a" || descriptions[d].substr(0,1)==="e" || descriptions[d].substr(0,1)==="i" || descriptions[d].substr(0,1)==="o" || descriptions[d].substr(0,1)==="u") {
+			generatedidea += "an ";
+		} else {
+			generatedidea += "a ";
+		}
+		generatedidea += descriptions[d] + " ";
+	} else {
+		if (locations[l].substr(0,1)==="a" || locations[l].substr(0,1)==="e" || locations[l].substr(0,1)==="i" || locations[l].substr(0,1)==="o" || locations[l].substr(0,1)==="u") {
+			generatedidea += "an ";
+		} else {
+			generatedidea += "a ";
+		}
+	}
+	generatedidea += locations[l] + " ";
+	
+	if (n4 >= 0) {
+		generatedidea += "with ";
+		AddNounPiece(a4, n4, -1);
+	}
+}
+
+function buildSentence10() {
+/* "you explore a [desc] [location] with a [adj] [noun] while you [verb] a [adj] [noun]." */
+	generatedidea += "you ";
+	
+	generatedidea += "explore ";
+
+	if (d >= 0) {
+		if (descriptions[d].substr(0,1)==="a" || descriptions[d].substr(0,1)==="e" || descriptions[d].substr(0,1)==="i" || descriptions[d].substr(0,1)==="o" || descriptions[d].substr(0,1)==="u") {
+			generatedidea += "an ";
+		} else {
+			generatedidea += "a ";
+		}
+		generatedidea += descriptions[d] + " ";
+	} else {
+		if (locations[l].substr(0,1)==="a" || locations[l].substr(0,1)==="e" || locations[l].substr(0,1)==="i" || locations[l].substr(0,1)==="o" || locations[l].substr(0,1)==="u") {
+			generatedidea += "an ";
+		} else {
+			generatedidea += "a ";
+		}
+	}
+	generatedidea += locations[l] + " ";
+	
+	if (n4 >= 0) {
+		generatedidea += "with ";
+		AddNounPiece(a1, n1, -1);
+	}
+	
+	AddConnectorPiece();
+	
+	if (n3 >= 0) {
+		generatedidea += "you ";
+		generatedidea += verbs2nd[v2] + " ";
+	}
+	if (n4 >= 0) {
+		AddNounPiece(a4, n4, -1);
+	}
+}
+
+function buildSentence11() {
+/* "a [adj] [noun] explores a [desc] [location] with a [adj] [noun]." */
+	o4=Math.floor(Math.random() * 10);		//Select Plural or Single noun again.
+	if (adjectiveNumber >= 0) {
+		if (o4 < 5) {
+			if (adjectives[adjectiveNumber].substr(0,1)==="a" || adjectives[adjectiveNumber].substr(0,1)==="e" || adjectives[adjectiveNumber].substr(0,1)==="i" || adjectives[adjectiveNumber].substr(0,1)==="o" || adjectives[adjectiveNumber].substr(0,1)==="u") {
+				generatedidea += "an ";
+			} else {
+				generatedidea += "a ";
+			}
+		}
+		generatedidea += adjectives[adjectiveNumber] + " ";
+	} else {
+		if (o4 < 5) {
+			if (nouns[nounNumber].substr(0,1)==="a" || nouns[nounNumber].substr(0,1)==="e" || nouns[nounNumber].substr(0,1)==="i" || nouns[nounNumber].substr(0,1)==="o" || nouns[nounNumber].substr(0,1)==="u") {
+				generatedidea += "an ";
+			} else {
+				generatedidea += "a ";
+			}
+		}
+	}
+	if (o4 < 5) {
+		generatedidea += nouns[nounNumber];
+		if (verbNumber >= 0) {
+			generatedidea += " explores ";
+		}
+	} else {
+		generatedidea += pnouns[nounNumber];
+		if (verbNumber >= 0) {
+			generatedidea += " explore ";
+		}
+	}
+
+	if (d >= 0) {
+		if (descriptions[d].substr(0,1)==="a" || descriptions[d].substr(0,1)==="e" || descriptions[d].substr(0,1)==="i" || descriptions[d].substr(0,1)==="o" || descriptions[d].substr(0,1)==="u") {
+			generatedidea += "an ";
+		} else {
+			generatedidea += "a ";
+		}
+		generatedidea += descriptions[d] + " ";
+	} else {
+		if (locations[l].substr(0,1)==="a" || locations[l].substr(0,1)==="e" || locations[l].substr(0,1)==="i" || locations[l].substr(0,1)==="o" || locations[l].substr(0,1)==="u") {
+			generatedidea += "an ";
+		} else {
+			generatedidea += "a ";
+		}
+	}
+	generatedidea += locations[l] + " ";
+	
+	if (n4 >= 0) {
+		generatedidea += "with ";
+		AddNounPiece(a4, n4, -1);
 	}
 }
 
