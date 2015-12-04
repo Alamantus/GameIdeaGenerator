@@ -1,6 +1,6 @@
 /**********************************************************************************
 	Script Name: Insanity Jam Game Idea Generator
-	Author: Robbie Antenesse, head developer of Alamantus Inc.
+	Author: Robbie Antenesse, head developer of Alamantus
 	Contact: gamedev@alamantus.com
 	Purpose: Takes a seed and randomly generates a sentence by selecting random
 			 words from several word lists and by randomly selecting a sentence
@@ -10,50 +10,34 @@
 	Dependencies: seedrandom.js
 				  jquery-1.x.js  (Any jquery, basically. If unchanged, this folder
 								  uses jquery-1.11.0.js or jquery-1.11.0.min.js)
-				  Word Lists:
-				  values/gametypes.txt
-				  values/nouns.txt
-				  values/pluralnouns.txt
-				  values/concepts.txt
-				  values/adjectives.txt
-				  values/locations.txt
-				  values/descriptions.txt
-				  values/verbs2nd.txt
-				  values/verbs2ndconcepts.txt
-				  values/verbs3rd.txt
-				  values/additions.txt
+				  values/wordlists.json
+				  
 **********************************************************************************/
 
 var gt = 0;	//game type
 var n1 = n2 = n3 = n4 = c = l = 0;	//nouns
 var v1 = v2 = vc = 0;	//verbs
 var a1 = a2 = a3 = a4 = d = 0;	//adjectives and location description
-var o1 = o2 = o3 = o4 = sentencestructure = 0;	//optional/chance additions
-var types = nouns = pnouns = concepts = verbs2nd = verbs2ndconcepts = verbs3rd = adjectives = locations = descriptions = additions = [];
+var o1 = o2 = o3 = o4 = sentencestructure = 0;	//optional/chance wordlists.additions
+var wordlists = {};
 var generatedidea = "";
 
 //Make jquery calls to populate these array variables with all the words from the word lists
-var typesCall = $.get("values/gametypes.txt", function (data) { types = data.split("\n"); });
-var nounsCall = $.get("values/nouns.txt", function (data) { nouns = data.split("\n"); });
-var pluralnounsCall = $.get("values/pluralnouns.txt", function (data) { pnouns = data.split("\n"); });
-var conceptsCall = $.get("values/concepts.txt", function (data) { concepts = data.split("\n"); });
-var adjsCall = $.get("values/adjectives.txt", function (data) { adjectives = data.split("\n"); });
-var locsCall = $.get("values/locations.txt", function (data) { locations = data.split("\n"); });
-var descsCall = $.get("values/descriptions.txt", function (data) { descriptions = data.split("\n"); });
-var verbs2ndCall = $.get("values/verbs2nd.txt", function (data) { verbs2nd = data.split("\n"); });
-var verbs2ndconceptsCall = $.get("values/verbs2ndconcepts.txt", function (data) { verbs2ndconcepts = data.split("\n"); });
-var verbs3rdCall = $.get("values/verbs3rd.txt", function (data) { verbs3rd = data.split("\n"); });
-var additionsCall = $.get("values/additions.txt", function (data) { additions = data.split("\n"); });
+var wordlistsCall = $.get("values/wordlists.json", function (data) { wordlists = JSON.parse(data); });
 
-var generatedSeed, ideaPositionOnPage, seedBox, lockGenre, genreLockedTo, removeGenre;
+var generatedSeed = 0;
+var ideaPositionOnPage = document.getElementById('ideatext'),
+	seedBox = document.getElementById('seedbox'),
+	lockGenre = document.getElementById('lock'),
+	genreLockedTo = "",
+	removeGenre = document.getElementById('remove'),
+	lockOption = document.getElementById('lockoption');
 
 function PlaceIdeaOnPage(randomize, debug) {
-	generatedSeed = Math.random().toString().substring(2,13);
-	ideaPositionOnPage = document.getElementById('ideatext');
-	seedBox = document.getElementById('seedbox');
-	lockGenre = document.getElementById('lock');
-	genreLockedTo = "";
-	removeGenre = document.getElementById('remove');
+	generatedSeed = Math.ceil(Math.random() * 10).toString();
+
+	var genrePlaceholder = document.getElementById('genreplaceholder');
+
 	//Prepare all the values from the page
 	if (randomize || seedBox.value == '') {
 		seedBox.value = generatedSeed;
@@ -63,16 +47,16 @@ function PlaceIdeaOnPage(randomize, debug) {
         $('#genreoptions').show(700);  
     };
 	if (lockGenre.checked) {
-		genreLockedTo = document.getElementById('genreplaceholder').innerHTML;
+		genreLockedTo = genrePlaceholder.innerHTML;
 	} else {
 		genreLockedTo = "";
 	}
 	if (removeGenre.checked) {
-		document.getElementById('lockoption').innerHTML = "<span title='There is no genre to lock.\nUncheck &ldquo;Remove Genre&rdquo; and Generate or Re-Roll to get a genre.' style='color:gray;'>Lock Genre <span class='glyphicon glyphicon-remove-circle' style='font-size:80%;'><input name='genrelock' id='lock' type='checkbox' class='hidden' /></span></span>";
-		document.getElementById('genreplaceholder').innerHTML = "";
+		lockOption.innerHTML = "<span title='There is no genre to lock.\nUncheck &ldquo;Remove Genre&rdquo; and Generate or Re-Roll to get a genre.' style='color:gray;'>Lock Genre <span class='glyphicon glyphicon-remove-circle' style='font-size:80%;'><input name='genrelock' id='lock' type='checkbox' class='hidden' /></span></span>";
+		genrePlaceholder.innerHTML = "";
 	} else {
 		if (!lockGenre.checked) {
-			document.getElementById('lockoption').innerHTML = 'Lock Genre <input name="genrelock" id="lock" class="clickable" type="checkbox" onclick="lockTheGenre();" />';
+			lockOption.innerHTML = 'Lock Genre <input name="genrelock" id="lock" class="clickable" type="checkbox" onclick="lockTheGenre();" />';
 		}
 	}
 	
@@ -84,7 +68,7 @@ function PlaceIdeaOnPage(randomize, debug) {
 	else {
 		Math.seedrandom(generatedSeed);
 	}
-	$.when(typesCall, nounsCall, pluralnounsCall, conceptsCall, verbs2ndCall, verbs2ndconceptsCall, verbs3rdCall, adjsCall, locsCall, descsCall, additionsCall).done(function () {
+	$.when(wordlistsCall).done(function () {
 		//Use jquery $.when to generate only after each of the word list arrays have been filled.
 		generatedidea = "";
 		buildIdea(genreLockedTo, removeGenre.checked);
@@ -105,7 +89,7 @@ function PlaceIdeaOnPage(randomize, debug) {
 
 function buildIdea(genre, genreIsRemoved) {
 	//Trim whitespace from before/after noun lists to prevent odd spacing in generated sentences.
-	trimWhitespaceFromLists(nouns, pnouns, locations, concepts);
+	trimWhitespaceFromLists(wordlists.nouns, wordlists.nouns, wordlists.locations, wordlists.concepts);
 	
 	//Set the variables to their random values.
 	generateRandomValues();
@@ -156,8 +140,8 @@ function buildIdea(genre, genreIsRemoved) {
 	if (o3 < 5) {
 		generatedidea += ".";
 	} else {
-		var add = Math.floor(Math.random() * additions.length);
-		generatedidea += additions[add];
+		var add = Math.floor(Math.random() * wordlists.additions.length);
+		generatedidea += wordlists.additions[add];
 	}
 	generatedidea += "<end />";
 }
@@ -189,13 +173,13 @@ function trimWhitespaceFromLists(list1, list2, list3, list4) {
 }
 
 function generateRandomValues() {
-	gt=Math.floor(Math.random() * types.length);	//Gives game type a value within the game types list.
-	n1=Math.floor(Math.random() * nouns.length);	//Gives noun1 a value within the nouns list.
-	n2=Math.floor(Math.random() * nouns.length);	//Gives noun2 a value within the nouns list.
-	c=Math.floor(Math.random() * concepts.length);	//Gives concept a value within the concepts list.
-	l=Math.floor(Math.random() * locations.length);	//Gives location a value within the locations list.
-	v1=Math.floor(Math.random() * verbs3rd.length);	//Gives verb1 a value within the verbs list.
-	vc=Math.floor(Math.random() * verbs2ndconcepts.length);	//Gives verb2 a value within the concepts verbs list.
+	gt=Math.floor(Math.random() * wordlists.gametypes.length);	//Gives game type a value within the game wordlists.gametypes list.
+	n1=Math.floor(Math.random() * wordlists.nouns.length);	//Gives noun1 a value within the nouns list.
+	n2=Math.floor(Math.random() * wordlists.nouns.length);	//Gives noun2 a value within the nouns list.
+	c=Math.floor(Math.random() * wordlists.concepts.length);	//Gives concept a value within the concepts list.
+	l=Math.floor(Math.random() * wordlists.locations.length);	//Gives location a value within the wordlists.locations list.
+	v1=Math.floor(Math.random() * wordlists.verbs3rd.length);	//Gives verb1 a value within the verbs list.
+	vc=Math.floor(Math.random() * wordlists.wordlists.verbs2ndConcepts.length);	//Gives verb2 a value within the concepts verbs list.
 	
 	//Get Adjectives or decide if there will be adjectives
 	o1=Math.floor(Math.random() * 5);
@@ -203,23 +187,23 @@ function generateRandomValues() {
 		a1 = a2 = d = -1;
 	}
 	if (o1 == 1) {
-		a1 = Math.floor(Math.random() * adjectives.length);
+		a1 = Math.floor(Math.random() * wordlists.adjectives.length);
 		a2 = d = -1;
 	}
 	if (o1 == 2) {
-		a2 = Math.floor(Math.random() * adjectives.length);
-		d = Math.floor(Math.random() * descriptions.length);
+		a2 = Math.floor(Math.random() * wordlists.adjectives.length);
+		d = Math.floor(Math.random() * wordlists.descriptions.length);
 		a1 = -1;
 	}
 	if (o1 == 3) {
-		a1 = Math.floor(Math.random() * adjectives.length);
-		a2 = Math.floor(Math.random() * adjectives.length);
-		d = Math.floor(Math.random() * descriptions.length);
+		a1 = Math.floor(Math.random() * wordlists.adjectives.length);
+		a2 = Math.floor(Math.random() * wordlists.adjectives.length);
+		d = Math.floor(Math.random() * wordlists.descriptions.length);
 	}
 	if (o1 == 4) {
-		a2 = Math.floor(Math.random() * adjectives.length);
-		d = Math.floor(Math.random() * descriptions.length);
-		a1 = Math.floor(Math.random() * adjectives.length);
+		a2 = Math.floor(Math.random() * wordlists.adjectives.length);
+		d = Math.floor(Math.random() * wordlists.descriptions.length);
+		a1 = Math.floor(Math.random() * wordlists.adjectives.length);
 	}
 	
 	//Roll again for o1 to check for expanded sentences
@@ -230,30 +214,30 @@ function generateRandomValues() {
 	}
 	else {
 		//Set up expanded sentence parts
-		n3=Math.floor(Math.random() * nouns.length);	//Gives noun3 a value between 0 and 99, providing 100 noun options
-		n4=Math.floor(Math.random() * nouns.length);	//Gives noun4 a value between 0 and 99, providing 100 noun options
-		v2=Math.floor(Math.random() * verbs3rd.length);	//Gives verb2 a value between 0 and 99, providing 100 noun options
+		n3=Math.floor(Math.random() * wordlists.nouns.length);	//Gives noun3 a value between 0 and 99, providing 100 noun options
+		n4=Math.floor(Math.random() * wordlists.nouns.length);	//Gives noun4 a value between 0 and 99, providing 100 noun options
+		v2=Math.floor(Math.random() * wordlists.verbs3rd.length);	//Gives verb2 a value between 0 and 99, providing 100 noun options
 		
-		//Get Adjectives or decide if there will be adjectives
+		//Get Adjectives or decide if there will be wordlists.adjectives
 		o2=Math.floor(Math.random() * 5);
 		if (o2 == 0) {
 			a3 = a4 = -1;
 		}
 		if (o2 == 1) {
-			a3 = Math.floor(Math.random() * adjectives.length);
+			a3 = Math.floor(Math.random() * wordlists.adjectives.length);
 			a4 = -1;
 		}
 		if (o2 == 2) {
-			a4 = Math.floor(Math.random() * adjectives.length);
+			a4 = Math.floor(Math.random() * wordlists.adjectives.length);
 			a3 = -1;
 		}
 		if (o2 == 3) {
-			a3 = Math.floor(Math.random() * adjectives.length);
-			a4 = Math.floor(Math.random() * adjectives.length);
+			a3 = Math.floor(Math.random() * wordlists.adjectives.length);
+			a4 = Math.floor(Math.random() * wordlists.adjectives.length);
 		}
 		if (o2 == 4) {
-			a4 = Math.floor(Math.random() * adjectives.length);
-			a3 = Math.floor(Math.random() * adjectives.length);
+			a4 = Math.floor(Math.random() * wordlists.adjectives.length);
+			a3 = Math.floor(Math.random() * wordlists.adjectives.length);
 		}
 		
 		o3=Math.floor(Math.random() * 10);	//Select the connector word/phrase.
@@ -283,12 +267,12 @@ function setGenre(genre, genreIsRemoved) {
 	} else {
 		generatedidea += "<div id='genre'>";
 		if (genre == '') {
-			if (types[gt].substr(0,1)==="a" || types[gt].substr(0,1)==="e" || types[gt].substr(0,1)==="i" || types[gt].substr(0,1)==="o" || types[gt].substr(0,1)==="u") {
+			if (wordlists.gametypes[gt].substr(0,1)==="a" || wordlists.gametypes[gt].substr(0,1)==="e" || wordlists.gametypes[gt].substr(0,1)==="i" || wordlists.gametypes[gt].substr(0,1)==="o" || wordlists.gametypes[gt].substr(0,1)==="u") {
 				generatedidea += "An ";
 			} else {
 				generatedidea += "A ";
 			}
-			generatedidea += types[gt] + " </div>";
+			generatedidea += wordlists.gametypes[gt] + " </div>";
 		} else {
 			generatedidea += genre + " </div>";		//No need to add an article because it is already there.
 		}
@@ -297,7 +281,7 @@ function setGenre(genre, genreIsRemoved) {
 }
 
 function setAndShowHistory(seed, genre, genreIsRemoved) {
-	$.when(typesCall, nounsCall, pluralnounsCall, conceptsCall, verbs2ndCall, verbs2ndconceptsCall, verbs3rdCall, adjsCall, locsCall, descsCall, additionsCall).done(function () {
+	$.when(typesCall, wordlists.nounsCall, pluralnounsCall, conceptsCall, wordlists.verbs2ndCall, wordlists.wordlists.verbs2ndConceptsCall, wordlists.verbs3rdCall, adjsCall, locsCall, descsCall, additionsCall).done(function () {
 		var genHistory = [];
 		var histCookie = getCookie("history");
 		if (histCookie != "") {
@@ -370,14 +354,14 @@ function buildSentence1() {
 function buildSentence2() {
 /* "you [verb2a] a [adj] [noun] in a [desc] [location] while you [verb2act] a [adj] [noun]." */
 	generatedidea += "you ";
-	generatedidea += verbs2nd[v1] + " ";
+	generatedidea += wordlists.verbs2nd[v1] + " ";
 	
 	AddNounPiece(a2, n2, -1);
 	
 	AddConnectorPiece();
 	if (n3 >= 0) {
 		generatedidea += "you ";
-		generatedidea += verbs2nd[v2] + " ";
+		generatedidea += wordlists.verbs2nd[v2] + " ";
 	}
 	if (n4 >= 0) {
 		AddNounPiece(a4, n4, -1);
@@ -388,7 +372,7 @@ function buildSentence3() {
 /* "you [verb2a] a [adj] [noun] in a [desc] [location] while it [verb2act] you." */
 	generatedidea += "you ";
 	
-	generatedidea += verbs2nd[v1] + " ";
+	generatedidea += wordlists.verbs2nd[v1] + " ";
 	
 	AddNounPiece(a2, n2, -1);
 	
@@ -398,11 +382,11 @@ function buildSentence3() {
 	
 	if (n3 >= 0) {
 		if (o4 < 5) {
-			generatedidea += "the same " + nouns[n2] + " ";
-			generatedidea += verbs3rd[v2] + " you";
+			generatedidea += "the same " + wordlists.nouns[n2][0] + " ";
+			generatedidea += wordlists.verbs3rd[v2] + " you";
 		} else {
-			generatedidea += "the same " + pnouns[n2] + " ";
-			generatedidea += verbs2nd[v2] + " you";
+			generatedidea += "the same " + wordlists.nouns[n2][1] + " ";
+			generatedidea += wordlists.verbs2nd[v2] + " you";
 		}
 	}
 }
@@ -411,7 +395,7 @@ function buildSentence4() {
 /* "you [verb2a] a [adj] [noun] in a [desc] [location] while you [verb2act] a [adj] [noun]." */
 	generatedidea += "you ";
 	
-	generatedidea += verbs2nd[v1] + " ";
+	generatedidea += wordlists.verbs2nd[v1] + " ";
 	
 	AddNounPiece(a2, n2, -1);
 
@@ -421,7 +405,7 @@ function buildSentence4() {
 	
 	if (n3 >= 0) {
 		generatedidea += "you ";
-		generatedidea += verbs2nd[v2] + " ";
+		generatedidea += wordlists.verbs2nd[v2] + " ";
 	}
 	if (n4 >= 0) {
 		AddNounPiece(a4, n4, -1);
@@ -431,7 +415,7 @@ function buildSentence4() {
 function buildSentence5() {
 /* "you [verb] the [superlative] [adj] [noun]." */
 	generatedidea += "you ";
-	generatedidea += verbs2nd[v1] + " ";
+	generatedidea += wordlists.verbs2nd[v1] + " ";
 	
 	o3=Math.floor(Math.random() * 20);
 	switch (o3) {
@@ -479,19 +463,19 @@ function buildSentence5() {
 	
 	o4=Math.floor(Math.random() * 10);		//Select Plural or Single noun again.
 	if (a1 >= 0) {
-		generatedidea += adjectives[a1] + " ";
+		generatedidea += wordlists.adjectives[a1] + " ";
 	}
 	if (o4 < 5) {
-		generatedidea += nouns[n1];
+		generatedidea += wordlists.nouns[n1][0];
 	} else {
-		generatedidea += pnouns[n1];
+		generatedidea += wordlists.nouns[n1][1];
 	}
 }
 
 function buildSentence6() {
 /* "you [verb] a [adj] [noun] (in a [desc] [location]) to win a [adj] [noun]." */
 	generatedidea += "you ";
-	generatedidea += verbs2nd[v1] + " ";
+	generatedidea += wordlists.verbs2nd[v1] + " ";
 	
 	AddNounPiece(a1, n1, -1);
 	
@@ -530,9 +514,9 @@ function buildSentence6() {
 function buildSentence7() {
 /* "you [verb(concept)] [concept]." */
 	generatedidea += "you ";
-	v1=Math.floor(Math.random() * verbs2ndconcepts.length);
-	generatedidea += verbs2ndconcepts[vc] + " ";
-	generatedidea += concepts[c];
+	v1=Math.floor(Math.random() * wordlists.wordlists.verbs2ndConcepts.length);
+	generatedidea += wordlists.wordlists.verbs2ndConcepts[vc] + " ";
+	generatedidea += wordlists.concepts[c];
 	
 	switch (o3) {
 		case 0: generatedidea += " while ";
@@ -560,54 +544,38 @@ function buildSentence7() {
 		o4=Math.floor(Math.random() * 10);		//Select Plural or Single noun again.
 		if (a3 >= 0) {
 			if (o4 < 5) {
-				if (adjectives[a3].substr(0,1)==="a" || adjectives[a3].substr(0,1)==="e" || adjectives[a3].substr(0,1)==="i" || adjectives[a3].substr(0,1)==="o" || adjectives[a3].substr(0,1)==="u") {
-					generatedidea += "an ";
-				} else {
-					generatedidea += "a ";
-				}
+				generatedidea += GetArticle(wordlists.adjectives[a3]);
 			}
-			generatedidea += adjectives[a3] + " ";
+			generatedidea += wordlists.adjectives[a3] + " ";
 		} else {
 			if (o4 < 5) {
-				if (nouns[n3].substr(0,1)==="a" || nouns[n3].substr(0,1)==="e" || nouns[n3].substr(0,1)==="i" || nouns[n3].substr(0,1)==="o" || nouns[n3].substr(0,1)==="u") {
-					generatedidea += "an ";
-				} else {
-					generatedidea += "a ";
-				}
+				generatedidea += GetArticle(wordlists.nouns[n3][0]);
 			}
 		}
 		if (o4 < 5) {
-			generatedidea += nouns[n3] + " ";
-			generatedidea += verbs3rd[v2] + " ";
+			generatedidea += wordlists.nouns[n3][0] + " ";
+			generatedidea += wordlists.verbs3rd[v2] + " ";
 		} else {
-			generatedidea += pnouns[n3] + " ";
-			generatedidea += verbs2nd[v2] + " ";
+			generatedidea += wordlists.nouns[n3][1] + " ";
+			generatedidea += wordlists.verbs2nd[v2] + " ";
 		}
 	}
 	if (n4 >= 0) {
 		o4=Math.floor(Math.random() * 10);		//Select Plural or Single noun again.
 		if (a4 >= 0) {
 			if (o4 < 5) {
-				if (adjectives[a4].substr(0,1)==="a" || adjectives[a4].substr(0,1)==="e" || adjectives[a4].substr(0,1)==="i" || adjectives[a4].substr(0,1)==="o" || adjectives[a4].substr(0,1)==="u") {
-					generatedidea += "an ";
-				} else {
-					generatedidea += "a ";
-				}
+				generatedidea += GetArticle(wordlists.adjectives[a4]);
 			}
-			generatedidea += adjectives[a4] + " ";
+			generatedidea += wordlists.adjectives[a4] + " ";
 		} else {
 			if (o4 < 5) {
-				if (nouns[n4].substr(0,1)==="a" || nouns[n4].substr(0,1)==="e" || nouns[n4].substr(0,1)==="i" || nouns[n4].substr(0,1)==="o" || nouns[n4].substr(0,1)==="u") {
-					generatedidea += "an ";
-				} else {
-					generatedidea += "a ";
-				}
+				generatedidea += GetArticle(wordlists.nouns[n4][0]);
 			}
 		}
 		if (o4 < 5) {
-			generatedidea += nouns[n4];
+			generatedidea += wordlists.nouns[n4][0];
 		} else {
-			generatedidea += pnouns[n4];
+			generatedidea += wordlists.nouns[n4][1];
 		}
 	}
 }
@@ -615,9 +583,9 @@ function buildSentence7() {
 function buildSentence8() {
 /* "you [verb(concept)] [concept] with a [adj] [noun]." */
 	generatedidea += "you ";
-	v1=Math.floor(Math.random() * verbs2ndconcepts.length);
-	generatedidea += verbs2ndconcepts[vc] + " ";
-	generatedidea += concepts[c];
+	v1=Math.floor(Math.random() * wordlists.wordlists.verbs2ndConcepts.length);
+	generatedidea += wordlists.wordlists.verbs2ndConcepts[vc] + " ";
+	generatedidea += wordlists.concepts[c];
 	
 	switch (o3) {
 		case 0: generatedidea += " with ";
@@ -645,26 +613,18 @@ function buildSentence8() {
 		o4=Math.floor(Math.random() * 10);		//Select Plural or Single noun again.
 		if (a3 >= 0) {
 			if (o4 < 5) {
-				if (adjectives[a3].substr(0,1)==="a" || adjectives[a3].substr(0,1)==="e" || adjectives[a3].substr(0,1)==="i" || adjectives[a3].substr(0,1)==="o" || adjectives[a3].substr(0,1)==="u") {
-					generatedidea += "an ";
-				} else {
-					generatedidea += "a ";
-				}
+				generatedidea += GetArticle(wordlists.adjectives[a3]);
 			}
-			generatedidea += adjectives[a3] + " ";
+			generatedidea += wordlists.adjectives[a3] + " ";
 		} else {
 			if (o4 < 5) {
-				if (nouns[n3].substr(0,1)==="a" || nouns[n3].substr(0,1)==="e" || nouns[n3].substr(0,1)==="i" || nouns[n3].substr(0,1)==="o" || nouns[n3].substr(0,1)==="u") {
-					generatedidea += "an ";
-				} else {
-					generatedidea += "a ";
-				}
+				generatedidea += GetArticle(wordlists.nouns[n3][0]);
 			}
 		}
 		if (o4 < 5) {
-			generatedidea += nouns[n3];
+			generatedidea += wordlists.nouns[n3][0];
 		} else {
-			generatedidea += pnouns[n3];
+			generatedidea += wordlists.nouns[n3][1];
 		}
 	}
 }
@@ -676,20 +636,12 @@ function buildSentence9() {
 	generatedidea += "explore ";
 
 	if (d >= 0) {
-		if (descriptions[d].substr(0,1)==="a" || descriptions[d].substr(0,1)==="e" || descriptions[d].substr(0,1)==="i" || descriptions[d].substr(0,1)==="o" || descriptions[d].substr(0,1)==="u") {
-			generatedidea += "an ";
-		} else {
-			generatedidea += "a ";
-		}
-		generatedidea += descriptions[d] + " ";
+		generatedidea += GetArticle(wordlists.descriptions[d]);
+		generatedidea += wordlists.descriptions[d] + " ";
 	} else {
-		if (locations[l].substr(0,1)==="a" || locations[l].substr(0,1)==="e" || locations[l].substr(0,1)==="i" || locations[l].substr(0,1)==="o" || locations[l].substr(0,1)==="u") {
-			generatedidea += "an ";
-		} else {
-			generatedidea += "a ";
-		}
+		generatedidea += GetArticle(wordlists.locations[l]);
 	}
-	generatedidea += locations[l] + " ";
+	generatedidea += wordlists.locations[l] + " ";
 	
 	if (n4 >= 0) {
 		generatedidea += "with ";
@@ -704,20 +656,12 @@ function buildSentence10() {
 	generatedidea += "explore ";
 
 	if (d >= 0) {
-		if (descriptions[d].substr(0,1)==="a" || descriptions[d].substr(0,1)==="e" || descriptions[d].substr(0,1)==="i" || descriptions[d].substr(0,1)==="o" || descriptions[d].substr(0,1)==="u") {
-			generatedidea += "an ";
-		} else {
-			generatedidea += "a ";
-		}
-		generatedidea += descriptions[d] + " ";
+		generatedidea += GetArticle(wordlists.descriptions[d]);
+		generatedidea += wordlists.descriptions[d] + " ";
 	} else {
-		if (locations[l].substr(0,1)==="a" || locations[l].substr(0,1)==="e" || locations[l].substr(0,1)==="i" || locations[l].substr(0,1)==="o" || locations[l].substr(0,1)==="u") {
-			generatedidea += "an ";
-		} else {
-			generatedidea += "a ";
-		}
+		generatedidea += GetArticle(wordlists.locations[l]);
 	}
-	generatedidea += locations[l] + " ";
+	generatedidea += wordlists.locations[l] + " ";
 	
 	if (n4 >= 0) {
 		generatedidea += "with ";
@@ -728,7 +672,7 @@ function buildSentence10() {
 	
 	if (n3 >= 0) {
 		generatedidea += "you ";
-		generatedidea += verbs2nd[v2] + " ";
+		generatedidea += wordlists.verbs2nd[v2] + " ";
 	}
 	if (n4 >= 0) {
 		AddNounPiece(a4, n4, -1);
@@ -740,49 +684,33 @@ function buildSentence11() {
 	o4=Math.floor(Math.random() * 10);		//Select Plural or Single noun again.
 	if (adjectiveNumber >= 0) {
 		if (o4 < 5) {
-			if (adjectives[adjectiveNumber].substr(0,1)==="a" || adjectives[adjectiveNumber].substr(0,1)==="e" || adjectives[adjectiveNumber].substr(0,1)==="i" || adjectives[adjectiveNumber].substr(0,1)==="o" || adjectives[adjectiveNumber].substr(0,1)==="u") {
-				generatedidea += "an ";
-			} else {
-				generatedidea += "a ";
-			}
+			generatedidea += GetArticle(wordlists.adjectives[adjectiveNumber]);
+			generatedidea += wordlists.adjectives[adjectiveNumber] + " ";
 		}
-		generatedidea += adjectives[adjectiveNumber] + " ";
 	} else {
 		if (o4 < 5) {
-			if (nouns[nounNumber].substr(0,1)==="a" || nouns[nounNumber].substr(0,1)==="e" || nouns[nounNumber].substr(0,1)==="i" || nouns[nounNumber].substr(0,1)==="o" || nouns[nounNumber].substr(0,1)==="u") {
-				generatedidea += "an ";
-			} else {
-				generatedidea += "a ";
-			}
+			generatedidea += GetArticle(wordlists.nouns[nounNumber][0]);
 		}
 	}
 	if (o4 < 5) {
-		generatedidea += nouns[nounNumber];
+		generatedidea += wordlists.nouns[nounNumber][0];
 		if (verbNumber >= 0) {
 			generatedidea += " explores ";
 		}
 	} else {
-		generatedidea += pnouns[nounNumber];
+		generatedidea += wordlists.nouns[nounNumber][1];
 		if (verbNumber >= 0) {
 			generatedidea += " explore ";
 		}
 	}
 
 	if (d >= 0) {
-		if (descriptions[d].substr(0,1)==="a" || descriptions[d].substr(0,1)==="e" || descriptions[d].substr(0,1)==="i" || descriptions[d].substr(0,1)==="o" || descriptions[d].substr(0,1)==="u") {
-			generatedidea += "an ";
-		} else {
-			generatedidea += "a ";
-		}
-		generatedidea += descriptions[d] + " ";
+		generatedidea += GetArticle(wordlists.descriptions[d]);
+		generatedidea += wordlists.descriptions[d] + " ";
 	} else {
-		if (locations[l].substr(0,1)==="a" || locations[l].substr(0,1)==="e" || locations[l].substr(0,1)==="i" || locations[l].substr(0,1)==="o" || locations[l].substr(0,1)==="u") {
-			generatedidea += "an ";
-		} else {
-			generatedidea += "a ";
-		}
+		generatedidea += GetArticle(wordlists.locations[l]);
 	}
-	generatedidea += locations[l] + " ";
+	generatedidea += wordlists.locations[l] + " ";
 	
 	if (n4 >= 0) {
 		generatedidea += "with ";
@@ -794,31 +722,23 @@ function AddNounPiece(adjectiveNumber, nounNumber, verbNumber) {		//Use -1 to ex
 	o4=Math.floor(Math.random() * 10);		//Select Plural or Single noun again.
 	if (adjectiveNumber >= 0) {
 		if (o4 < 5) {
-			if (adjectives[adjectiveNumber].substr(0,1)==="a" || adjectives[adjectiveNumber].substr(0,1)==="e" || adjectives[adjectiveNumber].substr(0,1)==="i" || adjectives[adjectiveNumber].substr(0,1)==="o" || adjectives[adjectiveNumber].substr(0,1)==="u") {
-				generatedidea += "an ";
-			} else {
-				generatedidea += "a ";
-			}
+			generatedidea += GetArticle(wordlists.adjectives[adjectiveNumber]);
 		}
-		generatedidea += adjectives[adjectiveNumber] + " ";
+		generatedidea += wordlists.adjectives[adjectiveNumber] + " ";
 	} else {
 		if (o4 < 5) {
-			if (nouns[nounNumber].substr(0,1)==="a" || nouns[nounNumber].substr(0,1)==="e" || nouns[nounNumber].substr(0,1)==="i" || nouns[nounNumber].substr(0,1)==="o" || nouns[nounNumber].substr(0,1)==="u") {
-				generatedidea += "an ";
-			} else {
-				generatedidea += "a ";
-			}
+			generatedidea += GetArticle(wordlists.nouns[nounNumber][0]);
 		}
 	}
 	if (o4 < 5) {
-		generatedidea += nouns[nounNumber];
+		generatedidea += wordlists.nouns[nounNumber][0];
 		if (verbNumber >= 0) {
-			generatedidea += " " + verbs3rd[verbNumber] + " ";
+			generatedidea += " " + wordlists.verbs3rd[verbNumber] + " ";
 		}
 	} else {
-		generatedidea += pnouns[nounNumber];
+		generatedidea += wordlists.nouns[nounNumber][1];
 		if (verbNumber >= 0) {
-			generatedidea += " " + verbs2nd[verbNumber] + " ";
+			generatedidea += " " + wordlists.verbs2nd[verbNumber] + " ";
 		}
 	}
 }
@@ -826,48 +746,34 @@ function AddNounPiece(adjectiveNumber, nounNumber, verbNumber) {		//Use -1 to ex
 function AddLocationPiece() {
 	var preposition=Math.floor(Math.random() * 10);
 	switch (preposition) {
-		case 0: generatedidea += " in ";
+		case 0: generatedidea += " near ";
 			break;
-		case 1: generatedidea += " near ";
+		case 1: generatedidea += " under ";
 			break;
-		case 2: generatedidea += " under ";
+		case 2: generatedidea += " around ";
 			break;
-		case 3: generatedidea += " around ";
+		case 3: generatedidea += " to win ";
 			break;
-		case 4: generatedidea += " to win ";
+		case 4: generatedidea += " beside ";
 			break;
-		case 5: generatedidea += " beside ";
+		case 5: generatedidea += " to destroy ";
 			break;
-		case 6: generatedidea += " to destroy ";
+		case 6: generatedidea += " above ";
 			break;
-		case 7: generatedidea += " above ";
-			break;
-		case 8: generatedidea += " in ";
-			break;
-		case 9: generatedidea += " in ";
+		default: generatedidea += " in ";
 			break;
 	}
 	if (d >= 0) {
-		if (descriptions[d].substr(0,1)==="a" || descriptions[d].substr(0,1)==="e" || descriptions[d].substr(0,1)==="i" || descriptions[d].substr(0,1)==="o" || descriptions[d].substr(0,1)==="u") {
-			generatedidea += "an ";
-		} else {
-			generatedidea += "a ";
-		}
-		generatedidea += descriptions[d] + " ";
+		generatedidea += GetArticle(wordlists.descriptions[d]);
+		generatedidea += wordlists.descriptions[d] + " ";
 	} else {
-		if (locations[l].substr(0,1)==="a" || locations[l].substr(0,1)==="e" || locations[l].substr(0,1)==="i" || locations[l].substr(0,1)==="o" || locations[l].substr(0,1)==="u") {
-			generatedidea += "an ";
-		} else {
-			generatedidea += "a ";
-		}
+		generatedidea += GetArticle(wordlists.locations[l]);
 	}
-	generatedidea += locations[l];
+	generatedidea += wordlists.locations[l];
 }
 
 function AddConnectorPiece() {
 	switch (o3) {
-		case 0: generatedidea += " while ";
-			break;
 		case 1: generatedidea += " because ";
 			break;
 		case 2: generatedidea += ", and ";
@@ -884,7 +790,16 @@ function AddConnectorPiece() {
 			break;
 		case 8: generatedidea += ", which means that ";
 			break;
-		case 9: generatedidea += " while ";
+		default: generatedidea += " while ";
 			break;
+	}
+}
+
+function GetArticle (word) {
+	word = word.trim();
+	if (word.substr(0,1)==="a" || word.substr(0,1)==="e" || word.substr(0,1)==="i" || word.substr(0,1)==="o" || word.substr(0,1)==="u") {
+		return "an ";
+	} else {
+		return "a ";
 	}
 }
