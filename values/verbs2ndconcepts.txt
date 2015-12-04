@@ -35,6 +35,8 @@ crush
 destroy
 dismantle
 eliminate
+empower
+enrich
 escape
 establish
 fight against
