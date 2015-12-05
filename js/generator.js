@@ -20,21 +20,25 @@ var v1 = v2 = vc = 0;	//verbs
 var a1 = a2 = a3 = a4 = d = 0;	//adjectives and location description
 var o1 = o2 = o3 = o4 = sentencestructure = 0;	//optional/chance wordlists.additions
 var wordlists = {};
+var generatedSeed = 0;
 var generatedidea = "";
 
 //Make jquery calls to populate these array variables with all the words from the word lists
-var wordlistsCall = $.get("values/wordlists.json", function (data) { wordlists = JSON.parse(data); });
+var wordlistsCall = $.get("values/wordlists.json", function (data) {
+	wordlists = JSON.parse(data);
+	//Trim whitespace from before/after noun lists to prevent odd spacing in generated sentences.
+	TrimWhitespaceFromLists();
+});
 
-var generatedSeed = 0;
+var	genreLockedTo = "";
 var ideaPositionOnPage = document.getElementById('ideatext'),
 	seedBox = document.getElementById('seedbox'),
 	lockGenre = document.getElementById('lock'),
-	genreLockedTo = "",
 	removeGenre = document.getElementById('remove'),
 	lockOption = document.getElementById('lockoption');
 
 function PlaceIdeaOnPage(randomize, debug) {
-	generatedSeed = Math.ceil(Math.random() * 10).toString();
+	generatedSeed = (RandomNumber(10) + 1).toString();
 
 	var genrePlaceholder = document.getElementById('genreplaceholder');
 
@@ -70,12 +74,12 @@ function PlaceIdeaOnPage(randomize, debug) {
 	}
 	$.when(wordlistsCall).done(function () {
 		//Use jquery $.when to generate only after each of the word list arrays have been filled.
-		generatedidea = "";
-		buildIdea(genreLockedTo, removeGenre.checked);
-		// generatevalues(seed, genre, genreIsRemoved);
+		generatedidea = GenerateIdea(genreLockedTo, removeGenre.checked);
+
 		//Put the text in the designated area.
 		ideaPositionOnPage.innerHTML = generatedidea;
-		setAndShowHistory(seedBox.value, genreLockedTo, removeGenre.checked);
+		SetAndShowHistory(seedBox.value, genreLockedTo, removeGenre.checked);
+		
 		//Debug
 		if (debug) {
 			var debugpage = document.getElementById('details');
@@ -87,87 +91,54 @@ function PlaceIdeaOnPage(randomize, debug) {
 	});
 }
 
-function buildIdea(genre, genreIsRemoved) {
-	//Trim whitespace from before/after noun lists to prevent odd spacing in generated sentences.
-	trimWhitespaceFromLists(wordlists.nouns, wordlists.nouns, wordlists.locations, wordlists.concepts);
-	
+function GenerateIdea(genre, genreIsRemoved) {
+	var generated = "";
+
 	//Set the variables to their random values.
 	generateRandomValues();
 	
 	//Set the Genre. If no genre is provided (from genre lock), it is generated.
 	setGenre(genre, genreIsRemoved);
+
+	//Select the sentence structure. The number is equal to the number of sentence structures there are to choose from.
+	var sentenceStructures = [
+		BuildSentence0,
+		BuildSentence1,
+		BuildSentence2,
+		BuildSentence3,
+		BuildSentence4,
+		BuildSentence5,
+		BuildSentence6,
+		BuildSentence7,
+		BuildSentence8,
+		BuildSentence9,
+		BuildSentence10,
+		BuildSentence11
+	];
+	generated += sentenceStructures[RandomNumber(sentenceStructures.length)]();
 	
-	switch (sentencestructure) {
-		case 0:
-			buildSentenceO();
-			break;
-		case 1:
-			buildSentence1();
-			break;
-		case 2:
-			buildSentence2();
-			break;
-		case 3:
-			buildSentence3();
-			break;
-		case 4:
-			buildSentence4();
-			break;
-		case 5:
-			buildSentence5();
-			break;
-		case 6:
-			buildSentence6();
-			break;
-		case 7:
-			buildSentence7();
-			break;
-		case 8:
-			buildSentence8();
-			break;
-		case 9:
-			buildSentence9();
-			break;
-		case 10:
-			buildSentence10();
-			break;
-		case 11:
-			buildSentence11();
-			break;
-	}
-	generatedidea = generatedidea.trim();
-	o3=Math.floor(Math.random() * 10);		//Randomize if you get a sentence addition
-	if (o3 < 5) {
-		generatedidea += ".";
+	generated = generated.trim();
+
+	if (RandomNumber(10) > 5) {
+		generated += wordlists.additions[RandomNumber(wordlists.additions.length)];
 	} else {
-		var add = Math.floor(Math.random() * wordlists.additions.length);
-		generatedidea += wordlists.additions[add];
+		generated += ".";
 	}
-	generatedidea += "<end />";
+	generated += "<end />";
+
+	return generated;
 }
 
-function trimWhitespaceFromLists(list1, list2, list3, list4) {
-	if (list1 == undefined) {
-		alert("No Lists Specified to trim whitespace.");
-	}
-	else {
-		for (var i = 0; i < list1.length; i++) {
-			list1[i] = list1[i].trim();
-		}
-	}
-	if (list2 != undefined) {
-		for (var i = 0; i < list2.length; i++) {
-			list2[i] = list2[i].trim();
-		}
-	}
-	if (list3 != undefined) {
-		for (var i = 0; i < list3.length; i++) {
-			list3[i] = list3[i].trim();
-		}
-	}
-	if (list4 != undefined) {
-		for (var i = 0; i < list4.length; i++) {
-			list4[i] = list4[i].trim();
+function TrimWhitespaceFromLists() {
+	var lists = wordlists.getOwnPropertyNames();
+	for (var list = 0; list < lists.length; list++) {
+		for (var word = 0; word < wordlists[lists[list]].length; word++) {
+			if (typeof wordlists[lists[list]][word] === 'string') {
+				wordlists[lists[list]][word] = wordlists[lists[list]][word].trim();
+			} else {
+				wordlists[lists[list]][word][0] = wordlists[lists[list]][word][0].trim();
+				wordlists[lists[list]][word][1] = wordlists[lists[list]][word][1].trim();
+			}
 		}
 	}
 }
@@ -280,7 +251,7 @@ function setGenre(genre, genreIsRemoved) {
 	generatedidea += "game where ";
 }
 
-function setAndShowHistory(seed, genre, genreIsRemoved) {
+function SetAndShowHistory(seed, genre, genreIsRemoved) {
 	$.when(typesCall, wordlists.nounsCall, pluralnounsCall, conceptsCall, wordlists.verbs2ndCall, wordlists.wordlists.verbs2ndConceptsCall, wordlists.verbs3rdCall, adjsCall, locsCall, descsCall, additionsCall).done(function () {
 		var genHistory = [];
 		var histCookie = getCookie("history");
@@ -319,7 +290,7 @@ function setAndShowHistory(seed, genre, genreIsRemoved) {
 	});
 }
 
-function buildSentenceO() {
+function BuildSentenceO() {
 /* "A [adj] [noun] [verb] a [adj] [noun] while a [adj] [noun] [verb] a [adj] [noun]." */
 	AddNounPiece(a1, n1, v1);
 	
@@ -334,7 +305,7 @@ function buildSentenceO() {
 	}
 }
 
-function buildSentence1() {
+function BuildSentence1() {
 /* "a [adj] [noun] [verb] a [adj] [noun] in a [desc] [location] while a [adj] [noun] [verb] a [adj] [noun]." */
 	AddNounPiece(a1, n1, v1);
 	
@@ -351,7 +322,7 @@ function buildSentence1() {
 	}
 }
 
-function buildSentence2() {
+function BuildSentence2() {
 /* "you [verb2a] a [adj] [noun] in a [desc] [location] while you [verb2act] a [adj] [noun]." */
 	generatedidea += "you ";
 	generatedidea += wordlists.verbs2nd[v1] + " ";
@@ -368,7 +339,7 @@ function buildSentence2() {
 	}
 }
 
-function buildSentence3() {
+function BuildSentence3() {
 /* "you [verb2a] a [adj] [noun] in a [desc] [location] while it [verb2act] you." */
 	generatedidea += "you ";
 	
@@ -391,7 +362,7 @@ function buildSentence3() {
 	}
 }
 
-function buildSentence4() {
+function BuildSentence4() {
 /* "you [verb2a] a [adj] [noun] in a [desc] [location] while you [verb2act] a [adj] [noun]." */
 	generatedidea += "you ";
 	
@@ -412,7 +383,7 @@ function buildSentence4() {
 	}
 }
 
-function buildSentence5() {
+function BuildSentence5() {
 /* "you [verb] the [superlative] [adj] [noun]." */
 	generatedidea += "you ";
 	generatedidea += wordlists.verbs2nd[v1] + " ";
@@ -472,7 +443,7 @@ function buildSentence5() {
 	}
 }
 
-function buildSentence6() {
+function BuildSentence6() {
 /* "you [verb] a [adj] [noun] (in a [desc] [location]) to win a [adj] [noun]." */
 	generatedidea += "you ";
 	generatedidea += wordlists.verbs2nd[v1] + " ";
@@ -511,7 +482,7 @@ function buildSentence6() {
 	AddNounPiece(a2, n2, -1);
 }
 
-function buildSentence7() {
+function BuildSentence7() {
 /* "you [verb(concept)] [concept]." */
 	generatedidea += "you ";
 	v1=Math.floor(Math.random() * wordlists.wordlists.verbs2ndConcepts.length);
@@ -580,7 +551,7 @@ function buildSentence7() {
 	}
 }
 
-function buildSentence8() {
+function BuildSentence8() {
 /* "you [verb(concept)] [concept] with a [adj] [noun]." */
 	generatedidea += "you ";
 	v1=Math.floor(Math.random() * wordlists.wordlists.verbs2ndConcepts.length);
@@ -629,7 +600,7 @@ function buildSentence8() {
 	}
 }
 
-function buildSentence9() {
+function BuildSentence9() {
 /* "you explore a [desc] [location] with a [adj] [noun]." */
 	generatedidea += "you ";
 	
@@ -649,7 +620,7 @@ function buildSentence9() {
 	}
 }
 
-function buildSentence10() {
+function BuildSentence10() {
 /* "you explore a [desc] [location] with a [adj] [noun] while you [verb] a [adj] [noun]." */
 	generatedidea += "you ";
 	
@@ -679,7 +650,7 @@ function buildSentence10() {
 	}
 }
 
-function buildSentence11() {
+function BuildSentence11() {
 /* "a [adj] [noun] explores a [desc] [location] with a [adj] [noun]." */
 	o4=Math.floor(Math.random() * 10);		//Select Plural or Single noun again.
 	if (adjectiveNumber >= 0) {
@@ -718,81 +689,98 @@ function buildSentence11() {
 	}
 }
 
-function AddNounPiece(adjectiveNumber, nounNumber, verbNumber) {		//Use -1 to exclude a trailing verb
-	o4=Math.floor(Math.random() * 10);		//Select Plural or Single noun again.
-	if (adjectiveNumber >= 0) {
-		if (o4 < 5) {
-			generatedidea += GetArticle(wordlists.adjectives[adjectiveNumber]);
-		}
-		generatedidea += wordlists.adjectives[adjectiveNumber] + " ";
-	} else {
-		if (o4 < 5) {
-			generatedidea += GetArticle(wordlists.nouns[nounNumber][0]);
-		}
+function AddNounPiece(includeVerb) {
+	includeVerb = (typeof includeVerb !== 'undefined') ? includeVerb : true;	// Include verb by default.
+
+	var nounPiece = "";
+
+	var hasAdjective = RandomNumber(2) == 1;
+	var isPlural = RandomNumber(2) == 1;		//Select Plural or Single noun again.
+
+	var adjective = RandomNumber(wordlists.adjectives.length);
+	var noun = RandomNumber(wordlists.nouns.length);
+	var verb = RandomNumber(wordlists.verbs.length);
+	
+	// Add article if not plural.
+	if (!isPlural) {
+		nounPiece += (hasAdjective) ? GetArticle(wordlists.adjectives[adjective]) : GetArticle(wordlists.nouns[noun][0]);
 	}
-	if (o4 < 5) {
-		generatedidea += wordlists.nouns[nounNumber][0];
-		if (verbNumber >= 0) {
-			generatedidea += " " + wordlists.verbs3rd[verbNumber] + " ";
-		}
-	} else {
-		generatedidea += wordlists.nouns[nounNumber][1];
-		if (verbNumber >= 0) {
-			generatedidea += " " + wordlists.verbs2nd[verbNumber] + " ";
-		}
+
+	if (hasAdjective) {
+		nounPiece += wordlists.adjectives[adjective] + " ";
 	}
+
+	nounPiece += (isPlural) ? wordlists.nouns[nounNumber][1] : wordlists.nouns[nounNumber][0];
+
+	if (includeVerb) {
+		nounPiece += " " + ((isPlural) ? wordlists.verbs2nd[verbNumber] : wordlists.verbs3rd[verb]) + " ";
+	}
+
+	return nounPiece;
 }
 
 function AddLocationPiece() {
-	var preposition=Math.floor(Math.random() * 10);
-	switch (preposition) {
-		case 0: generatedidea += " near ";
+	var locationPiece = "";
+
+	var hasDescription = RandomNumber(2) == 1;
+	var description = RandomNumber(wordlists.descriptions.length);
+	var location = RandomNumber(wordlists.locations.length);
+	switch (RandomNumber(10)) {
+		case 0: locationPiece += " near ";
 			break;
-		case 1: generatedidea += " under ";
+		case 1: locationPiece += " under ";
 			break;
-		case 2: generatedidea += " around ";
+		case 2: locationPiece += " around ";
 			break;
-		case 3: generatedidea += " to win ";
+		case 3: locationPiece += " to win ";
 			break;
-		case 4: generatedidea += " beside ";
+		case 4: locationPiece += " beside ";
 			break;
-		case 5: generatedidea += " to destroy ";
+		case 5: locationPiece += " to destroy ";
 			break;
-		case 6: generatedidea += " above ";
+		case 6: locationPiece += " above ";
 			break;
-		default: generatedidea += " in ";
+		default: locationPiece += " in ";
 			break;
 	}
-	if (d >= 0) {
-		generatedidea += GetArticle(wordlists.descriptions[d]);
-		generatedidea += wordlists.descriptions[d] + " ";
+
+	if (hasDescription) {
+		locationPiece += GetArticle(wordlists.descriptions[description]);
+		locationPiece += wordlists.descriptions[description] + " ";
 	} else {
-		generatedidea += GetArticle(wordlists.locations[l]);
+		locationPiece += GetArticle(wordlists.locations[location]);
 	}
-	generatedidea += wordlists.locations[l];
+
+	locationPiece += wordlists.locations[location];
+
+	return locationPiece;
 }
 
 function AddConnectorPiece() {
-	switch (o3) {
-		case 1: generatedidea += " because ";
+	var connectorPiece = "";
+	
+	switch (RandomNumber(10)) {
+		case 1: connectorPiece += " because ";
 			break;
-		case 2: generatedidea += ", and ";
+		case 2: connectorPiece += ", and ";
 			break;
-		case 3: generatedidea += " even though ";
+		case 3: connectorPiece += " even though ";
 			break;
-		case 4: generatedidea += ", but ";
+		case 4: connectorPiece += ", but ";
 			break;
-		case 5: generatedidea += ", however ";
+		case 5: connectorPiece += ", however ";
 			break;
-		case 6: generatedidea += ", and then ";
+		case 6: connectorPiece += ", and then ";
 			break;
-		case 7: generatedidea += ". At the same time, ";
+		case 7: connectorPiece += ". At the same time, ";
 			break;
-		case 8: generatedidea += ", which means that ";
+		case 8: connectorPiece += ", which means that ";
 			break;
-		default: generatedidea += " while ";
+		default: connectorPiece += " while ";
 			break;
 	}
+
+	return connectorPiece;
 }
 
 function GetArticle (word) {
@@ -802,4 +790,9 @@ function GetArticle (word) {
 	} else {
 		return "a ";
 	}
+}
+
+function RandomNumber(maxPlusOne) {
+	// Returns random number from 0 to maxPlusOne. Good for arrays (just put array.length).
+	return Math.floor(Math.random() * maxPlusOne);
 }
