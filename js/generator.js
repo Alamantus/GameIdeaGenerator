@@ -14,18 +14,13 @@
 				  
 **********************************************************************************/
 
-var gt = 0;	//game type
-var n1 = n2 = n3 = n4 = c = l = 0;	//nouns
-var v1 = v2 = vc = 0;	//verbs
-var a1 = a2 = a3 = a4 = d = 0;	//adjectives and location description
-var o1 = o2 = o3 = o4 = sentencestructure = 0;	//optional/chance wordlists.additions
-var wordlists = {};
-var generatedSeed = 0;
+var wordlists;
+var generatedSeed = "0000000000";
 var generatedidea = "";
 
 //Make jquery calls to populate these array variables with all the words from the word lists
-var wordlistsCall = $.get("values/wordlists.json", function (data) {
-	wordlists = JSON.parse(data);
+var wordlistsCall = $.getJSON("values/wordlists.json", function (json) {
+	wordlists = json;
 	//Trim whitespace from before/after noun lists to prevent odd spacing in generated sentences.
 	TrimWhitespaceFromLists();
 });
@@ -38,7 +33,7 @@ var ideaPositionOnPage = document.getElementById('ideatext'),
 	lockOption = document.getElementById('lockoption');
 
 function PlaceIdeaOnPage(randomize, debug) {
-	generatedSeed = (RandomNumber(10) + 1).toString();
+	generatedSeed = Math.random().toString().substring(2,13);
 
 	var genrePlaceholder = document.getElementById('genreplaceholder');
 
@@ -95,7 +90,7 @@ function GenerateIdea(genre, genreIsRemoved) {
 	var generated = "";
 	
 	//Set the Genre. If no genre is provided (from genre lock), it is generated.
-	generated += setGenre(genreIsRemoved, genre);
+	generated += SetGenre(genreIsRemoved, genre);
 
 	//Select the sentence structure. The number is equal to the number of sentence structures there are to choose from.
 	var sentenceStructures = [
@@ -110,7 +105,7 @@ function GenerateIdea(genre, genreIsRemoved) {
 	generated = generated.trim();
 
 	if (CoinToss()) {
-		generated += wordlists.additions[RandomNumber(wordlists.additions.length)];
+		generated += AddAddonPiece();
 	} else {
 		generated += ".";
 	}
@@ -120,14 +115,20 @@ function GenerateIdea(genre, genreIsRemoved) {
 }
 
 function TrimWhitespaceFromLists() {
-	var lists = wordlists.getOwnPropertyNames();
+	var lists = Object.getOwnPropertyNames(wordlists);
 	for (var list = 0; list < lists.length; list++) {
 		for (var word = 0; word < wordlists[lists[list]].length; word++) {
 			if (typeof wordlists[lists[list]][word] === 'string') {
-				wordlists[lists[list]][word] = wordlists[lists[list]][word].trim();
+				if (typeof wordlists[lists[list]][word] === 'string') {
+					wordlists[lists[list]][word] = wordlists[lists[list]][word].trim();
+				}
 			} else {
-				wordlists[lists[list]][word][0] = wordlists[lists[list]][word][0].trim();
-				wordlists[lists[list]][word][1] = wordlists[lists[list]][word][1].trim();
+				if (typeof wordlists[lists[list]][word][0] === 'string') {
+					wordlists[lists[list]][word][0] = wordlists[lists[list]][word][0].trim();
+				}
+				if (typeof wordlists[lists[list]][word][1] === 'string') {
+					wordlists[lists[list]][word][1] = wordlists[lists[list]][word][1].trim();
+				}
 			}
 		}
 	}
@@ -140,15 +141,17 @@ function SetGenre(genreIsRemoved, genre) {
 		genrePiece += "A ";
 	} else {
 		genrePiece += "<div id='genre'>";
-		if (typeof genre !== 'undefined' && genre != null) {
+		if (typeof genre !== 'undefined' && genre != "") {
 			genrePiece += genre + " </div>";		//No need to add an article because it is already there.
 		} else {
 			var gametype = RandomNumber(wordlists.gametypes.length);
-			genrePiece += GetArticle(wordlists.gametypes[gametype]);
+			genrePiece += GetArticle(wordlists.gametypes[gametype], true);
 			genrePiece += wordlists.gametypes[gametype] + " </div>";
 		}
 	}
 	genrePiece += "game where ";
+
+	return genrePiece;
 }
 
 function SetAndShowHistory(seed, genre, genreIsRemoved) {
@@ -223,7 +226,7 @@ function BuildSentence2() {
 	var isPlural = CoinToss();
 
 	sentence += AddSecondPersonPiece();
-	sentence += AddNounPiece(CoinToss(), false, noun, reiterateNoun, isPlural);
+	sentence += AddNounPiece(CoinToss(), false, noun, false, isPlural);
 
 	if (includeLocation) {
 		sentence += AddLocationPiece();
@@ -255,7 +258,7 @@ function BuildSentence3() {
 		sentence += AddLocationPiece();
 	}
 
-	sentence += wordlists.reasons[RandomNumber(wordlists.reasons.length)] + " ";
+	sentence += " " + wordlists.reasons[RandomNumber(wordlists.reasons.length)] + " ";
 	sentence += AddNounPiece(CoinToss(), false);
 
 	return sentence;
@@ -279,10 +282,12 @@ function BuildSentence4() {
 				sentence += (CoinToss()) ? "you" : AddNounPiece(CoinToss(), false);
 			}
 		} else {
-			sentence += wordlists.reasons[RandomNumber(wordlists.reasons.length)] + " ";
+			sentence += " " + wordlists.reasons[RandomNumber(wordlists.reasons.length)] + " ";
 			sentence += AddNounPiece(CoinToss(), false);
 		}
 	}
+
+	return sentence;
 }
 
 function BuildSentence5() {
@@ -296,7 +301,7 @@ function BuildSentence5() {
 		sentence += " explores ";
 	}
 
-	sentence += AddLocationPiece();
+	sentence += AddLocationPiece(false);
 	
 	if (CoinToss()) {
 		sentence += AddConnectorPiece();
@@ -308,9 +313,11 @@ function BuildSentence5() {
 			sentence += (CoinToss()) ? "you" : AddNounPiece(CoinToss(), false);
 		}
 	} else {
-		sentence += wordlists.reasons[RandomNumber(wordlists.reasons.length)] + " ";
+		sentence += " " + wordlists.reasons[RandomNumber(wordlists.reasons.length)] + " ";
 		sentence += AddNounPiece(CoinToss(), false);
 	}
+	
+	return sentence;
 }
 
 function AddNounPiece(isSuperlative, includeVerb, specificNoun, doReiterate, isPlural) {
@@ -344,7 +351,7 @@ function AddNounPiece(isSuperlative, includeVerb, specificNoun, doReiterate, isP
 		nounPiece += "the same ";
 	}
 
-	nounPiece += (isPlural) ? wordlists.nouns[nounNumber][1] : wordlists.nouns[nounNumber][0];	// Does not include a space after noun in case an addition is needed.
+	nounPiece += (isPlural) ? wordlists.nouns[noun][1] : wordlists.nouns[noun][0];	// Does not include a space after noun in case an addition is needed.
 
 	if (includeVerb) {
 		nounPiece += " " + ((isPlural) ? wordlists.verbs2nd[RandomNumber(wordlists.verbs2nd.length)] : wordlists.verbs3rd[RandomNumber(wordlists.verbs3rd.length)]) + " ";
@@ -353,30 +360,33 @@ function AddNounPiece(isSuperlative, includeVerb, specificNoun, doReiterate, isP
 	return nounPiece;
 }
 
-function AddLocationPiece() {
-	var locationPiece = "";
+function AddLocationPiece(includePreposition) {
+	includePreposition = (typeof includePreposition !== 'undefined') ? includePreposition : true;
+	var locationPiece = " ";
 
 	var hasDescription = CoinToss();
 	var description = RandomNumber(wordlists.descriptions.length);
 	var location = RandomNumber(wordlists.locations.length);
 	
-	switch (RandomNumber(10)) {
-		case 0: locationPiece += " near ";
-			break;
-		case 1: locationPiece += " under ";
-			break;
-		case 2: locationPiece += " around ";
-			break;
-		case 3: locationPiece += " to win ";
-			break;
-		case 4: locationPiece += " beside ";
-			break;
-		case 5: locationPiece += " to destroy ";
-			break;
-		case 6: locationPiece += " above ";
-			break;
-		default: locationPiece += " in ";
-			break;
+	if (includePreposition) {
+		switch (RandomNumber(10)) {
+			case 0: locationPiece += "near ";
+				break;
+			case 1: locationPiece += "under ";
+				break;
+			case 2: locationPiece += "around ";
+				break;
+			case 3: locationPiece += "to win ";
+				break;
+			case 4: locationPiece += "beside ";
+				break;
+			case 5: locationPiece += "to destroy ";
+				break;
+			case 6: locationPiece += "above ";
+				break;
+			default: locationPiece += "in ";
+				break;
+		}
 	}
 
 	if (hasDescription) {
@@ -418,12 +428,26 @@ function AddConnectorPiece() {
 	return connectorPiece;
 }
 
-function GetArticle (word) {
+function AddAddonPiece() {
+	var addonPiece = "";
+
+	var addon = RandomNumber(wordlists.addons.length);
+
+	if (['.', ','].indexOf(wordlists.addons[addon].substr(0,1)) < 0) {
+		addonPiece += " ";
+	}
+
+	addonPiece += wordlists.addons[addon];
+
+	return addonPiece;
+}
+
+function GetArticle (word, capitalize) {
 	word = word.trim();
 	if (word.toLowerCase().substr(0,1)==="a" || word.toLowerCase().substr(0,1)==="e" || word.toLowerCase().substr(0,1)==="i" || word.toLowerCase().substr(0,1)==="o" || word.toLowerCase().substr(0,1)==="u") {
-		return "an ";
+		return ((capitalize) ? "A" : "a") + "n ";
 	} else {
-		return "a ";
+		return ((capitalize) ? "A" : "a") + " ";
 	}
 }
 
