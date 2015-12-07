@@ -1618,6 +1618,17 @@
         "your feelings",
         "your life"
     ],
+    "connections": [
+        "because",
+        ", and",
+        "even though",
+        ", but",
+        ", however",
+        ", and then",
+        ". At the same time,",
+        ", which means that",
+        "while","while","while"
+    ],
     "descriptions": [
         "abandoned",
         "alien",
@@ -2199,7 +2210,7 @@
         "yard",
         "zeppelin"
     ],
-    "noun": [
+    "nouns": [
         ["aardvark", "aardvarks"],
         ["aborigine", "aborigines"],
         ["accessory", "accessories"],
@@ -3215,6 +3226,55 @@
         ["zipper", "zippers"],
         ["zombie", "zombies"],
         ["zuchini", "zuchinis"]
+    ],
+    "reasons": [
+        "because of",
+        "to get",
+        "to win",
+        "for the benefit of",
+        "for",
+        "with",
+        "to discover",
+        "led by",
+        "leading",
+        "to get",
+        "for",
+        "to find",
+        "to win"
+    ],
+    "superlatives": [
+        "the most interesting",
+        "the least interesting",
+        "the best",
+        "the worst",
+        "the most powerful",
+        "the weakest",
+        "the most amazing",
+        "the most ridiculous",
+        "the most predictable",
+        "the most unbelievable",
+        "the most frustrating",
+        "the calmest",
+        "the most anxious",
+        "the most nervous",
+        "the most anxiety-inducing",
+        "the most peaceful",
+        "the most fearsome",
+        "the most ridiculous",
+        "the most infuriating",
+        "the loudest",
+        "the most beautiful",
+        "the softest",
+        "the cleanest",
+        "the shabbiest",
+        "the tallest",
+        "the biggest",
+        "the smallest",
+        "the tiniest",
+        "the cutest",
+        "the longest",
+        "the sweetest",
+        "the coldest"
     ],
     "verbs2nd": [
         "accelerate the growth of",
