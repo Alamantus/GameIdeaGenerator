@@ -23,26 +23,16 @@ function htmlspecialchars(str) {
 
 var hints = [];
 var h = 0;
-var hintsCall = $.get("values/hints.txt", function (data) { hints = data.split("\n"); });
+var hintsCall = $.get("values/hints.txt", function (data) {
+	hints = data.split("\n");
+	getNewHint();
+});
 
 function getNewHint() {
-	$.when(hintsCall).done(function () {
-		h = Math.floor(Math.random() * hints.length);
-		document.getElementById('hinttext').innerHTML = hints[h];
-	});
-}
-
-function addGenreDropdown() {		//Doesn't seem to work from this file
-	var genres = [];
-	var typesCall = $.get("values/gametypes.txt", function (data) { genres = data.split("\n"); });
-	var dropdownbox = '<select name="genres"><option value=""></option>';
-	$.when(typesCall).done(function () {
-		for (var i = 0; i < genres.length; i++) {
-			dropdownbox += '<option value="' + genres[i] + '">' + genres[i] + '</option>';
-		}
-		dropdownbox += '</select>';
-		document.getElementById('genreselect').innerHTML = dropdownbox;
-	});
+	// $.when(hintsCall).done(function () {
+	h = Math.floor(Math.random() * hints.length);
+	document.getElementById('hinttext').innerHTML = hints[h];
+	// });
 }
 
 function doLockGenreCheckboxStuff () {
@@ -57,14 +47,6 @@ function doLockGenreCheckboxStuff () {
 	if(document.getElementById('remove').checked){document.getElementById('remove').checked=false;
 	}
 }
-
-// function removeGenre() {
-	// if (document.getElementById('genre') == null) {
-		// setTimeout(removeGenre, 10);
-	// } else {
-		// document.getElementById('genre').innerHTML = "A ";
-	// }
-// }
 
 function setCookie(cname,cvalue,exdays)
 {
@@ -103,8 +85,7 @@ function lockTheGenre() {
 
 function removeTheGenre() {
 	if (document.getElementById('remove').checked) {
-		document.getElementById('lock').checked = false;
-		document.getElementById('genreplaceholder').innerHTML = '';
+		document.getElementById('genredropdown').value = "";
 	}
 }
 

@@ -18,19 +18,27 @@ var wordlists;
 var generatedSeed = "0000000000";
 var generatedidea = "";
 
-//Make jquery calls to populate these array variables with all the words from the word lists
-var wordlistsCall = $.getJSON("values/wordlists.json", function (json) {
-	wordlists = json;
-	//Trim whitespace from before/after noun lists to prevent odd spacing in generated sentences.
-	TrimWhitespaceFromLists();
-});
-
 var	genreLockedTo = "";
 var ideaPositionOnPage = document.getElementById('ideatext'),
 	seedBox = document.getElementById('seedbox'),
 	lockGenre = document.getElementById('lock'),
 	removeGenre = document.getElementById('remove'),
-	lockOption = document.getElementById('lockoption');
+	lockOption = document.getElementById('lockoption'),
+	genreSelect = document.getElementById('genredropdown');
+
+//Make jquery calls to populate these array variables with all the words from the word lists
+var wordlistsCall = $.getJSON("values/wordlists.json", function (json) {
+	wordlists = json;
+	//Trim whitespace from before/after noun lists to prevent odd spacing in generated sentences.
+	TrimWhitespaceFromLists();
+
+	for (var i = 0; i < wordlists.gametypes.length; i++) {
+		var genreOption = document.createElement('option');
+	    genreOption.appendChild(document.createTextNode(wordlists.gametypes[i]));
+	    genreOption.value = wordlists.gametypes[i];
+	    genreSelect.appendChild(genreOption);
+	}
+});
 
 function PlaceIdeaOnPage(randomize, debug) {
 	generatedSeed = Math.random().toString().substring(2,13);
@@ -41,23 +49,6 @@ function PlaceIdeaOnPage(randomize, debug) {
 	if (randomize || seedBox.value == '') {
 		seedBox.value = generatedSeed;
 	}
-    
-    if (!$('#genreoptions').is(':visible')) {  
-        $('#genreoptions').show(700);  
-    };
-	if (lockGenre.checked) {
-		genreLockedTo = genrePlaceholder.innerHTML;
-	} else {
-		genreLockedTo = "";
-	}
-	if (removeGenre.checked) {
-		lockOption.innerHTML = "<span title='There is no genre to lock.\nUncheck &ldquo;Remove Genre&rdquo; and Generate or Re-Roll to get a genre.' style='color:gray;'>Lock Genre <span class='glyphicon glyphicon-remove-circle' style='font-size:80%;'><input name='genrelock' id='lock' type='checkbox' class='hidden' /></span></span>";
-		genrePlaceholder.innerHTML = "";
-	} else {
-		if (!lockGenre.checked) {
-			lockOption.innerHTML = 'Lock Genre <input name="genrelock" id="lock" class="clickable" type="checkbox" onclick="lockTheGenre();" />';
-		}
-	}
 	
 	//Use the seed given to seed the random numbers
 	if (seedBox.value) {
@@ -67,13 +58,18 @@ function PlaceIdeaOnPage(randomize, debug) {
 	else {
 		Math.seedrandom(generatedSeed);
 	}
+    
+    if (!$('#genreoptions').is(':visible')) {  
+        $('#genreoptions').show(700);  
+    }
+	
 	$.when(wordlistsCall).done(function () {
 		//Use jquery $.when to generate only after each of the word list arrays have been filled.
-		generatedidea = GenerateIdea(genreLockedTo, removeGenre.checked);
+		generatedidea = GenerateIdea(removeGenre.checked);
 
 		//Put the text in the designated area.
 		ideaPositionOnPage.innerHTML = generatedidea;
-		SetAndShowHistory(seedBox.value, genreLockedTo, removeGenre.checked);
+		SetAndShowHistory(seedBox.value, genreSelect.value, removeGenre.checked);
 		
 		//Debug
 		if (debug) {
@@ -86,11 +82,11 @@ function PlaceIdeaOnPage(randomize, debug) {
 	});
 }
 
-function GenerateIdea(genre, genreIsRemoved) {
+function GenerateIdea(genreIsRemoved) {
 	var generated = "";
 	
 	//Set the Genre. If no genre is provided (from genre lock), it is generated.
-	generated += SetGenre(genreIsRemoved, genre);
+	generated += SetGenre(genreIsRemoved);
 
 	//Select the sentence structure. The number is equal to the number of sentence structures there are to choose from.
 	var sentenceStructures = [
@@ -134,22 +130,24 @@ function TrimWhitespaceFromLists() {
 	}
 }
 
-function SetGenre(genreIsRemoved, genre) {
+function SetGenre(genreIsRemoved) {
 	var genrePiece = "";
+
+	var genre = genreSelect.value;
 
 	if (genreIsRemoved) {
 		genrePiece += "A ";
 	} else {
-		genrePiece += "<div id='genre'>";
 		if (typeof genre !== 'undefined' && genre != "") {
-			genrePiece += genre + " </div>";		//No need to add an article because it is already there.
+			genrePiece += GetArticle(genre, true);
+			genrePiece += genre;
 		} else {
 			var gametype = RandomNumber(wordlists.gametypes.length);
 			genrePiece += GetArticle(wordlists.gametypes[gametype], true);
-			genrePiece += wordlists.gametypes[gametype] + " </div>";
+			genrePiece += wordlists.gametypes[gametype];
 		}
 	}
-	genrePiece += "game where ";
+	genrePiece += " game where ";
 
 	return genrePiece;
 }
@@ -316,7 +314,7 @@ function BuildSentence5() {
 		sentence += " " + wordlists.reasons[RandomNumber(wordlists.reasons.length)] + " ";
 		sentence += AddNounPiece(CoinToss(), false);
 	}
-	
+
 	return sentence;
 }
 

@@ -27,15 +27,14 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-  <script src="js/jquery-1.11.0.min.js"></script>
+  <script src="js/jquery-1.11.0.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
   <script src="js/seedrandom.min.js"></script>
-  <script src="js/pagescripts.min.js"></script>
-  <script src="js/generator.min.js"></script>
 </head>
 
 <body>
 <div class="container">
-<?php require "$root/includes/header.php"; ?>
+<?php //require "$root/includes/header.php"; ?>
 <div class="row marketing">
 <div class="panel panel-primary">
 	<div class="panel-heading">
@@ -47,8 +46,9 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 		</div>
 		
 		<div class="center-block text-center" id="genreoptions" style="display:none;">
-		<div id="lockoption" style="display:inline;">Lock Genre <input name="genrelock" id="lock" class="clickable" type="checkbox" onclick="lockTheGenre();" /></div><span id="genreplaceholder" class="hidden"></span>
-		&nbsp;&nbsp;&nbsp;Remove Genre <input name="genreremove" id="remove" class="clickable" type="checkbox" onclick="removeTheGenre();" />
+        <label>Specify a Genre: <select id="genredropdown"><option value=""></option></select></label><br />
+        <small>(Leave blank to randomize)</small><br />
+		<label>Remove Genre <input name="genreremove" id="remove" class="clickable" type="checkbox" onclick="removeTheGenre();" /></label>
 		</div>
 		
 		<div class="center-block text-center" id="rerollbox"><img id="reroll" class="clickable" src="images/dice.png" onclick="PlaceIdeaOnPage(true, '<?php echo $debug; ?>');" title="Re-Roll" />
@@ -57,7 +57,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
 		<div class="well well-lg bg-bright-green center-block" id="ideabox">
 			<p class="center-block text-center" id="ideatext" onclick="selectText('ideatext')">
-			Click the Dice or Enter a Seed to Generate!
+			<span class="clickable" onclick="PlaceIdeaOnPage(true, '<?php echo $debug; ?>');">Click the Dice or Enter a Seed to Generate!</span>
 			</p>
 			<p id="details"></p>
 		</div>
@@ -85,7 +85,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 				<h3 class="panel-title center-block text-center">Random Info:</h3>
 			</div>
 			<div class="panel-body">
-				<p class="center-block text-center" id="hinttext"><script>getNewHint();</script></p>
+				<p class="center-block text-center" id="hinttext"></p>
 			</div>
 			<div class="panel-footer">
 				<span class="center-block text-center clickable" id="newhint" onclick="javascript:getNewHint();">Get Another!</span>
@@ -94,11 +94,13 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 		
 	</div>
 	<div class="panel-footer">
-		<?php include "$root/includes/generator_footer.php"; ?>
+		<?php //include "$root/includes/generator_footer.php"; ?>
 	</div>
 </div>	<!--Primary Panel-->
 </div>	<!--Row-->
 
+<script src="js/pagescripts.js"></script>
+<script src="js/generator.js"></script>
 <?php
-	require "$root/includes/foot.php";
+	//require "$root/includes/foot.php";
 ?>
