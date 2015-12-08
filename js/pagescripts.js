@@ -1,3 +1,7 @@
+$( document ).ready(function() {
+    SetAndShowHistory("", "", "");
+});
+
 function selectText(containerid) {
 	if (document.selection) {
 		var range = document.body.createTextRange();

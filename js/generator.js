@@ -134,6 +134,7 @@ function SetGenre(genreIsRemoved) {
 	var genrePiece = "";
 
 	var genre = genreSelect.value;
+	var gametype = RandomNumber(wordlists.gametypes.length);	//Selecting RandomNumber here ensures that it will generate a consistent sentence.
 
 	if (genreIsRemoved) {
 		genrePiece += "A ";
@@ -142,7 +143,6 @@ function SetGenre(genreIsRemoved) {
 			genrePiece += GetArticle(genre, true);
 			genrePiece += genre;
 		} else {
-			var gametype = RandomNumber(wordlists.gametypes.length);
 			genrePiece += GetArticle(wordlists.gametypes[gametype], true);
 			genrePiece += wordlists.gametypes[gametype];
 		}
@@ -156,6 +156,7 @@ function SetAndShowHistory(seed, genre, genreIsRemoved) {
 	$.when(wordlistsCall).done(function () {
 		var genHistory = [];
 		var histCookie = getCookie("history");
+		var currentIdea = "";
 		if (histCookie != "") {
 			genHistory = histCookie.split("<end />,");
 		}
@@ -164,24 +165,25 @@ function SetAndShowHistory(seed, genre, genreIsRemoved) {
 				genHistory[i] += "<end />";
 			}
 		}
-		var currentIdea = "Seed: " + htmlspecialchars(seed);
-		if (genre != '') {
-			currentIdea += ' -- (Genre Locked to "' + genre.trim().replace("A ", "").replace("An ", "") + '")';
+		if (generatedidea != null && generatedidea != "") {
+			currentIdea = "Seed: " + htmlspecialchars(seed);
+			if (genre != '') {
+				currentIdea += ' -- (Genre Locked to "' + genre.trim().replace("A ", "").replace("An ", "") + '")';
+			}
+			if (genreIsRemoved) {
+				currentIdea += ' -- (Genre Removed)';
+			}
+			currentIdea += '<br />' + generatedidea.replace("<div id='genre'>", "").replace("</div>", "");
+			genHistory.unshift(currentIdea);
 		}
-		if (genreIsRemoved) {
-			currentIdea += ' -- (Genre Removed)';
-		}
-		currentIdea += '<br />' + generatedidea.replace("<div id='genre'>", "");
-		currentIdea = currentIdea.replace("</div>", "");
-		genHistory.unshift(currentIdea);
 		//Restrict to last 6 generated ideas, including the current idea.
 		if (genHistory.length > 6) {
-				genHistory = genHistory.slice(0, 6);
-			}
+			genHistory = genHistory.slice(0, 6);
+		}
 		setCookie("history",genHistory,-1);
 		var historySection = document.getElementById('history');
 		var historyParagraphs = "";
-		for(var i = 1; i < genHistory.length; i++) {	//Shows last 5 ideas (excluding current idea--starts at genHistory[1])
+		for(var i = (generatedidea == "") ? 0 : 1; i < genHistory.length - ((generatedidea == "") ? 1 : 0); i++) {	//Shows last 5 ideas (excluding current idea--starts at genHistory[1])
 			if (genHistory[i] != "") {
 				var idText = 'history' + i;
 				historyParagraphs += '<p id="' + idText + '" class="clickable" title="Click to Highlight for easy copying" onclick="selectText(\'' + idText + '\');">' + genHistory[i] + '</p>';

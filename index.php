@@ -46,9 +46,9 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 		</div>
 		
 		<div class="center-block text-center" id="genreoptions" style="display:none;">
-        <label>Specify a Genre: <select id="genredropdown"><option value=""></option></select></label><br />
+        <label>Lock Genre: <select id="genredropdown" onchange="PlaceIdeaOnPage(false, '<?php echo $debug; ?>');"><option value=""></option></select></label><br />
         <small>(Leave blank to randomize)</small><br />
-		<label>Remove Genre <input name="genreremove" id="remove" class="clickable" type="checkbox" onclick="removeTheGenre();" /></label>
+		<label>Remove Genre <input name="genreremove" id="remove" class="clickable" type="checkbox" onclick="removeTheGenre();PlaceIdeaOnPage(false, '<?php echo $debug; ?>');" /></label>
 		</div>
 		
 		<div class="center-block text-center" id="rerollbox"><img id="reroll" class="clickable" src="images/dice.png" onclick="PlaceIdeaOnPage(true, '<?php echo $debug; ?>');" title="Re-Roll" />
