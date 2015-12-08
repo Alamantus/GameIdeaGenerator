@@ -1,5 +1,5 @@
 <?php
-$version = "1.16";
+$version = "2.0";
 $debug = isset($_GET['debug']) ? true : "";
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
@@ -34,7 +34,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
 <body>
 <div class="container">
-<?php //require "$root/includes/header.php"; ?>
+<?php require "$root/includes/header.php"; ?>
 <div class="row marketing">
 <div class="panel panel-primary">
 	<div class="panel-heading">
@@ -94,7 +94,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 		
 	</div>
 	<div class="panel-footer">
-		<?php //include "$root/includes/generator_footer.php"; ?>
+		<?php include "$root/includes/generator_footer.php"; ?>
 	</div>
 </div>	<!--Primary Panel-->
 </div>	<!--Row-->
@@ -102,5 +102,5 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 <script src="js/pagescripts.js"></script>
 <script src="js/generator.js"></script>
 <?php
-	//require "$root/includes/foot.php";
+	require "$root/includes/foot.php";
 ?>
