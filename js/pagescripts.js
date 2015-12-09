@@ -46,8 +46,7 @@ function doLockGenreCheckboxStuff () {
 	} else {
 		document.getElementById('genreplaceholder').innerHTML = '';
 	}
-	//Uncheck Remove Box is This box is Checked
-	var removeCheckbox = document.getElementById('remove').checked;
+	
 	if(document.getElementById('remove').checked){document.getElementById('remove').checked=false;
 	}
 }

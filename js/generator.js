@@ -43,8 +43,6 @@ var wordlistsCall = $.getJSON("values/wordlists.json", function (json) {
 function PlaceIdeaOnPage(randomize, debug) {
 	generatedSeed = Math.random().toString().substring(2,13);
 
-	var genrePlaceholder = document.getElementById('genreplaceholder');
-
 	//Prepare all the values from the page
 	if (randomize || seedBox.value == '') {
 		seedBox.value = generatedSeed;
@@ -183,7 +181,7 @@ function SetAndShowHistory(seed, genre, genreIsRemoved) {
 		setCookie("history",genHistory,-1);
 		var historySection = document.getElementById('history');
 		var historyParagraphs = "";
-		for(var i = (generatedidea == "") ? 0 : 1; i < genHistory.length - ((generatedidea == "") ? 1 : 0); i++) {	//Shows last 5 ideas (excluding current idea--starts at genHistory[1])
+		for(var i = (generatedidea == "") ? 0 : 1; i < genHistory.length - ((generatedidea == "" && genHistory.length > 6) ? 1 : 0); i++) {	//Shows last 5 ideas (excluding current idea--starts at genHistory[1])
 			if (genHistory[i] != "") {
 				var idText = 'history' + i;
 				historyParagraphs += '<p id="' + idText + '" class="clickable" title="Click to Highlight for easy copying" onclick="selectText(\'' + idText + '\');">' + genHistory[i] + '</p>';

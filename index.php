@@ -27,7 +27,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
-  <script src="js/jquery-1.11.0.js"></script>
+  <script src="js/jquery-1.11.0.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="js/seedrandom.min.js"></script>
 </head>
@@ -99,8 +99,8 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 </div>	<!--Primary Panel-->
 </div>	<!--Row-->
 
-<script src="js/pagescripts.js"></script>
-<script src="js/generator.js"></script>
+<script src="js/pagescripts.min.js"></script>
+<script src="js/generator.min.js"></script>
 <?php
 	require "$root/includes/foot.php";
 ?>
