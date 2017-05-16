@@ -3,7 +3,7 @@
 Insanity Jam Game Idea Generator   
 Version 0.87
 
-Hosted at [http://www.insanityjam.com/idea](http://www.insanityjam.com/idea)
+Hosted at [https://alamantus.gitlab.io/GameIdeaGenerator](https://alamantus.gitlab.io/GameIdeaGenerator)
 
 Takes a seed and randomly generates a sentence by selecting random words from several word lists and by randomly selecting a sentence structure to place the words into.
 This version splits the process into helper functions, which makes it easier to add more sentence structures in the future.
@@ -24,14 +24,10 @@ This version splits the process into helper functions, which makes it easier to 
 * values/verbs3rd.txt
 * values/additions.txt
 
-### How do I get set up? ###
-
-* Load whole repository to a host and load the index.php page.
-
 ### Contribution guidelines ###
 
 * Leave Issues in the issue tracker
 * Leave Ideas in the issue tracker
 
-Author: Robbie Antenesse, head developer of Alamantus Inc.   
-Contact: gamedev@alamantus.com
+Author: Robbie Antenesse  
+Contact: dev@alamantus.com
