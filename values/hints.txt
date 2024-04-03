@@ -1,19 +1,19 @@
-Bored and want to help playtest and give feedback while you're not working on your own game? Check out the <a href="http://playchompy.com" target="_blank">Chompy!</a> playtest and leave some feedback!
-Need a way to organize a lexicon for a constructed language or something like it? Check out <a href="http://lexicon.ga" target="_blank">Lexiconga</a>, an easy to use dictionary builder!
-If you need quick and easy fantasy or sci-fi writing, there's a langauge called Zirka that you can use in your game! Check out <a href="http://zirka.ga" target="_blank">the official website</a> to learn how to use it!
+Bored and want to help playtest and give feedback while you're not working on your own game? Check out the <a href="https://alamantus.itch.io/chompy-playtest" target="_blank">Chompy!</a> playtest and leave some feedback!
+Need a way to organize a lexicon for a constructed language or something like it? Check out <a href="https://lexiconga.com" target="_blank">Lexiconga</a>, an easy to use dictionary builder!
+If you need quick and easy fantasy or sci-fi writing, there's a langauge called Zirka that you can use in your game! Check out <a href="https://alamantus.com/zirka" target="_blank">the official website</a> to learn how to use it!
 Clicking the game idea text <small>(from a computer)</small> will select all of it so you can copy it more easily!
 The History box saves up to 5 previously-generated ideas, using browser cookies. They're designed to only last as long as your browser session, so be sure to save any you like before you close your browser!
 Checking the "Lock Genre" box will keep the game type for future idea generations! <small>(It doesn't work retroactively, though.)</small>
-<a href="http://www.alamantus.com" target="_blank">Alamantus</a> is super cool. <small>(Be sure to give him lots of money and gifts)</small>
+<a href="https://alamantus.com" target="_blank">Alamantus</a> is super cool. <small>(Be sure to give him lots of money and gifts)</small>
 Clicking that image of dice will give you a brand new seed with a brand new idea <small>(unless you have Lock Genre checked, in which case it will only be <em>mostly</em> brand new).</small>
 <a href="http://redeyemaniac.tumblr.com" target="_blank">RedEyeManiac</a> is pretty cool. <small>(Be sure to give him lots of money and gifts)</small>
 <a href="http://www.alamantus.com" target="_blank">Alamantus</a> built this generator from scratch! <small>(He found a few word lists online that really helped out, though.)</small>
-The Insanity Jam was conceived when <a href="http://www.alamantus.com" target="_blank">Alamantus</a> and <a href="http://redeyemaniac.tumblr.com" target="_blank">RedEyeManiac</a> discovered orteil42 (creator of <em>Cookie Clicker</em>)'s <a href="http://orteil.dashnet.org/gamegen" target="_blank">game idea generator</a>.
-This game idea generator was created to specifically be more tailored to the Insanity Jam as it came to be.
+The Insanity Jam was conceived when <a href="https://alamantus.com" target="_blank">Alamantus</a> and <a href="http://redeyemaniac.tumblr.com" target="_blank">RedEyeManiac</a> discovered orteil42 (creator of <em>Cookie Clicker</em>)'s <a href="http://orteil.dashnet.org/gamegen" target="_blank">game idea generator</a>.
+This game idea generator was created to specifically be more tailored to the <a href="https://insanityjamofficial.tumblr.com" target="_blank">Insanity Jam</a> as it came to be.
 The name "Insanity Jam" comes from orteil42's idea generator having a checkbox labeled "Sanity". To participate in the first Insanity Jam, you had to uncheck that box to get your idea.
 You can type anything into the Seed box. <small>(It defaults to random numbers because those are easier to randomly generate.)</small>
 Checking the "Remove Genre" box will remove the genre from your game idea, giving you a little bit more freedom in what kind of game you want to make with your idea.
 If you generate a game idea that you really like, but you don't like the genre that was generated for it, you can check "Remove Genre" and re-generate the seed you used to get your idea without the genre!
-The History box <em>could</em> save more ideas, but <a href="http://www.alamantus.com" target="_blank">Alamantus</a> didn't want to clog up your browser's cookies with too much text.
-You can suggest ideas for the Idea Generator, and we hope you do! Go to <a href="http://blog.insanityjam.com/submit" target="_blank">http://blog.insanityjam.com/submit</a> to send us sentence structures or ideas for new features and we'll do our best to add them!
-Want a word added to the generator that you don't think is in the word lists? Go to <a href="http://blog.insanityjam.com/submit" target="_blank">http://blog.insanityjam.com/submit</a> to send us a list and we'll do our best to add them!
+The History box <em>could</em> save more ideas, but <a href="https://alamantus.com" target="_blank">Alamantus</a> didn't want to clog up your browser's cookies with too much text.
+You can suggest ideas for the Idea Generator, and we hope you do! Go to <a href="https://insanityjamofficial.tumblr.com/submit" target="_blank">https://insanityjamofficial.tumblr.com/submit</a> to send us sentence structures or ideas for new features but nobody checks the inbox anymore!
+Want a word added to the generator that you don't think is in the word lists? Go to <a href="https://insanityjamofficial.tumblr.com/submit" target="_blank">https://insanityjamofficial.tumblr.com/submit</a> to send us a list but nobody checks that box anymore!
